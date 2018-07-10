@@ -1,3 +1,5 @@
-<p>
-  movies works!
-</p>
+<ul class="movies">
+  <li *ngFor="let movie of movies">
+    <span class="badge">{{movie.title}} {{movie.durationMinutes}} минут, {{movie.baseTicketPrice}} руб.</span>
+  </li>
+</ul>

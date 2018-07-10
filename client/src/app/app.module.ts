@@ -8,6 +8,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {MoviesComponent} from './components/movies/movies.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {MoviesComponent} from './components/movies/movies.component';
     AppRoutingModule,
     FormsModule,
     HttpModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
