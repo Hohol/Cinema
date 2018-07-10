@@ -1,7 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {User} from '../../model/model.user';
-import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {ApiService} from '../../services/api.service';
 
 
 @Component({
@@ -14,11 +14,11 @@ export class LoginComponent {
   user: User = new User();
   errorMessage: string;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private api: ApiService, private router: Router) {
   }
 
   login() {
-    this.authService.logIn(this.user)
+    this.api.logIn(this.user)
       .subscribe(response => {
           this.router.navigate(['/']);
         }, err => {

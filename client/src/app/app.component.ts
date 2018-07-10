@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from './model/model.user';
 import {NavigationStart, Router} from '@angular/router';
-import {AuthService} from './services/auth.service';
+import {ApiService} from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import {AuthService} from './services/auth.service';
 export class AppComponent implements OnInit {
   currentUser: User;
 
-  constructor(private router: Router, private auth: AuthService) {
+  constructor(private router: Router, private api: ApiService) {
   }
 
   private updateCurrentUser() {
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   }
 
   public logOut() {
-    this.auth.logOut()
+    this.api.logOut()
       .subscribe(r => {
         localStorage.removeItem('currentUser');
         this.router.navigate(['/']);

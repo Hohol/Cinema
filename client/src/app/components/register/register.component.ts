@@ -1,8 +1,8 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {User} from '../../model/model.user';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
 import {Moment} from 'moment';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-register',
@@ -15,13 +15,13 @@ export class RegisterComponent {
   birthday: Moment;
   errorMessage: string;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private api: ApiService, private router: Router) {
   }
 
   register() {
     this.user.birthday = this.birthday.format('YYYY-MM-DD');
-    this.auth.createAccount(this.user).subscribe(response => {
-        this.auth.logIn(this.user)
+    this.api.createAccount(this.user).subscribe(response => {
+        this.api.logIn(this.user)
           .subscribe(response2 => this.router.navigate(['/']));
       }, err => {
         console.log(err);
