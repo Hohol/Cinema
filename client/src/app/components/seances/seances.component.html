@@ -1,7 +1,8 @@
 <table class="table">
   <tbody>
   <tr *ngFor="let seance of seances">
-    <td>{{seance.movie.title}}</td>
+    <td style="text-align: left">{{seance.movie.title}}</td>
+    <td>{{convertDate(seance.startTime)}}</td>
     <td>Купить билеты</td>
   </tr>
   </tbody>
