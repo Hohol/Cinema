@@ -1,5 +1,6 @@
 package cinema;
 
+import cinema.movie.*;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,11 +17,11 @@ public class CinemaApplication {
     @Bean
     ApplicationRunner init(MovieRepository repository) {
         return args -> {
-            /*Stream.of(
+            Stream.of(
                     new Movie("Побег из Шоушенка", 120, 300),
                     new Movie("Зеленая миля", 135, 260),
                     new Movie("Матрица", 105, 350)
-            ).forEach(repository::save);*/
+            ).forEach(repository::save);
             repository.findAll().forEach(System.out::println);
         };
     }

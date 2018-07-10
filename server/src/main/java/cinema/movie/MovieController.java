@@ -1,16 +1,14 @@
-package cinema;
+package cinema.movie;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
 @RestController
-public class MovieController {
+class MovieController {
+    @Autowired
     private MovieRepository repository;
-
-    public MovieController(MovieRepository repository) {
-        this.repository = repository;
-    }
 
     @GetMapping("/movies")
     public Collection<Movie> movies() {

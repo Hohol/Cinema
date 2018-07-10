@@ -1,4 +1,4 @@
-package cinema;
+package cinema.movie;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    public long id;
     public String title;
     public int durationMinutes;
     public int baseTicketPrice;
