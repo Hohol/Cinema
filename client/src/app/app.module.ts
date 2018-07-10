@@ -6,7 +6,6 @@ import {RegisterComponent} from './components/register/register.component';
 import {LoginComponent} from './components/login/login.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
 import {MoviesComponent} from './components/movies/movies.component';
 import {HttpClientModule} from '@angular/common/http';
 import { SeancesComponent } from './components/seances/seances.component';
@@ -26,7 +25,6 @@ import { SeancesComponent } from './components/seances/seances.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpModule,
     HttpClientModule
   ],
   providers: [],

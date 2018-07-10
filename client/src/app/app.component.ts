@@ -9,7 +9,6 @@ import {AuthService} from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  static API_URL = 'http://localhost:8090';
   currentUser: User;
 
   constructor(private router: Router, private auth: AuthService) {
@@ -23,14 +22,12 @@ export class AppComponent implements OnInit {
     this.updateCurrentUser();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
-        this.currentUser = {username: 'asdf', password: 'asdf', id: 5};
-        console.log(this.currentUser);
         this.updateCurrentUser();
       }
     });
   }
 
-  public logout() {
+  public logOut() {
     this.auth.logOut()
       .subscribe(r => {
         localStorage.removeItem('currentUser');

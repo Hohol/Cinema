@@ -9,15 +9,16 @@ import {Seance} from '../model/model.seance';
   providedIn: 'root'
 })
 export class ApiService {
+  static API_URL = 'http://localhost:8090';
 
   constructor(private http: HttpClient) {
   }
 
   getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(AppComponent.API_URL + '/movies');
+    return this.http.get<Movie[]>(ApiService.API_URL + '/movies');
   }
 
   getSeances(): Observable<Seance[]> {
-    return this.http.get<Seance[]>(AppComponent.API_URL + '/seances');
+    return this.http.get<Seance[]>(ApiService.API_URL + '/seances');
   }
 }

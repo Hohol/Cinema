@@ -1,37 +1,39 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import {User} from '../model/model.user';
 import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ApiService} from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  API_URL = 'http://localhost:8090'; // todo get rid of duplication
-
-  constructor(public http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   public logIn(user: User) {
-    const headers = new Headers();
-    headers.append('Accept', 'application/json');
-    const base64Credential: string = btoa(user.username + ':' + user.password);
-    headers.append('Authorization', 'Basic ' + base64Credential);
-
-    const options = new RequestOptions();
-    options.headers = headers;
-
-    return this.http.get(this.API_URL + '/account/login', options)
-      .pipe(map((response: Response) => {
-        const responseUser = response.json().principal;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Authorization': 'Basic ' + btoa(user.username + ':' + user.password)
+      })
+    };
+    return this.http.get(ApiService.API_URL + '/account/login', httpOptions)
+      .pipe(map(response => {
+        const responseUser = response['principal'];
+        console.log('ru = ' + responseUser);
         if (responseUser) {
+          console.log(responseUser);
           localStorage.setItem('currentUser', JSON.stringify(responseUser));
         }
       }));
   }
 
-  logOut(): Observable<Response> {
-    return this.http.post(this.API_URL + '/logout', {});
+  logOut() {
+    return this.http.post(ApiService.API_URL + '/logout', {});
+  }
+
+  createAccount(user: User) {
+    return this.http.post(ApiService.API_URL + '/account/register', user);
   }
 }
