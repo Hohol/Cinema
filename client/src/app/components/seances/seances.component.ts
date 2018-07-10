@@ -15,7 +15,6 @@ export class SeancesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('seances oninit');
     this.api.getSeances()
       .subscribe(seances => this.seances = seances);
   }

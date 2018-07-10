@@ -14,7 +14,6 @@ export class AuthService {
   public logIn(user: User) {
     const headers = new Headers();
     headers.append('Accept', 'application/json');
-    // creating base64 encoded String from user name and password
     const base64Credential: string = btoa(user.username + ':' + user.password);
     headers.append('Authorization', 'Basic ' + base64Credential);
 
@@ -23,10 +22,8 @@ export class AuthService {
 
     return this.http.get(AppComponent.API_URL + '/account/login', options)
       .pipe(map((response: Response) => {
-        // login successful if there's a jwt token in the response
         const responseUser = response.json().principal;
         if (responseUser) {
-          // store user details  in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(responseUser));
         }
       }));
