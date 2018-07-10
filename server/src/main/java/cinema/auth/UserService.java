@@ -13,15 +13,7 @@ public class UserService {
         return userRepository.saveAndFlush(user);
     }
 
-    public User update(User user) {
-        return userRepository.save(user);
-    }
-
     public User find(String userName) {
         return userRepository.findOneByUsername(userName);
-    }
-
-    public User find(Long id) {
-        return userRepository.findOne(id);
     }
 }
