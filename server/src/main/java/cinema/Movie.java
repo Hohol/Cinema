@@ -7,30 +7,27 @@ import javax.persistence.*;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+    public Long id;
+    public String title;
+    public int durationMinutes;
+    public int baseTicketPrice;
 
-    public Long getId() {
-        return id;
+    public Movie() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Movie(String title, int durationMinutes, int baseTicketPrice) {
+        this.title = title;
+        this.durationMinutes = durationMinutes;
+        this.baseTicketPrice = baseTicketPrice;
     }
 
     @Override
     public String toString() {
         return "Movie{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                ", durationMinutes=" + durationMinutes +
+                ", baseTicketPrice=" + baseTicketPrice +
                 '}';
     }
 }

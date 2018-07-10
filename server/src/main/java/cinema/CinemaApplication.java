@@ -16,12 +16,11 @@ public class CinemaApplication {
     @Bean
     ApplicationRunner init(MovieRepository repository) {
         return args -> {
-            /*Stream.of("Ferrari", "Jaguar", "Porsche", "Lamborghini", "Bugatti",
-                    "AMC Gremlin", "Triumph Stag", "Ford Pinto", "Yugo GV").forEach(name -> {
-                Movie movie = new Movie();
-                movie.setName(name);
-                repository.save(movie);
-            });*/
+            /*Stream.of(
+                    new Movie("Побег из Шоушенка", 120, 300),
+                    new Movie("Зеленая миля", 135, 260),
+                    new Movie("Матрица", 105, 350)
+            ).forEach(repository::save);*/
             repository.findAll().forEach(System.out::println);
         };
     }
