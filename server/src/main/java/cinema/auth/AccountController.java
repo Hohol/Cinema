@@ -6,6 +6,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("account")
@@ -38,5 +39,8 @@ public class AccountController {
         return principal;
     }
 
-
+    @RequestMapping("/users") // todo only admin should be able to see it
+    public Collection<User> users() {
+        return userService.findAll();
+    }
 }

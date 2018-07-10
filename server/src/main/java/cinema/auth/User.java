@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.*;
 import java.util.*;
 
 @Entity
@@ -26,12 +27,15 @@ public class User implements UserDetails {
 
     private String role;
 
+    private LocalDate birthday;
+
     public User() {
     }
 
-    public User(String username, String password, Role role) {
+    public User(String username, String password, LocalDate birthday, Role role) {
         this.username = username;
         this.password = password;
+        this.birthday = birthday;
         this.role = role.toString();
     }
 
@@ -102,5 +106,9 @@ public class User implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
     }
 }

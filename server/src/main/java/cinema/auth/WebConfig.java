@@ -46,6 +46,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                         "/account/login",
                         "/logout",
                         "/movies",
+                        "/users",
                         "/seances"
                 ).permitAll()
                 .anyRequest().fullyAuthenticated().and()

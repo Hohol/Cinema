@@ -8,7 +8,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {FormsModule} from '@angular/forms';
 import {MoviesComponent} from './components/movies/movies.component';
 import {HttpClientModule} from '@angular/common/http';
-import { SeancesComponent } from './components/seances/seances.component';
+import {SeancesComponent} from './components/seances/seances.component';
+import {MatDatepickerModule, MatInputModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,11 @@ import { SeancesComponent } from './components/seances/seances.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatMomentDateModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

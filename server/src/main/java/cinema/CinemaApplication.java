@@ -7,6 +7,8 @@ import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
+
 @SpringBootApplication
 public class CinemaApplication {
 
@@ -24,7 +26,12 @@ public class CinemaApplication {
             Seance seance1 = seanceRepo.save(new Seance(movie1));
             Seance seance2 = seanceRepo.save(new Seance(movie2));
 
-            User user = userRepo.save(new User("nikita", "admin", User.Role.USER));
+            User user = userRepo.save(new User(
+                    "nikita",
+                    "admin",
+                    LocalDate.of(1991, 1, 2),
+                    User.Role.USER
+            ));
         };
     }
 }
