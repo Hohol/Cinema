@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {MoviesComponent} from './components/movies/movies.component';
 import {HttpClientModule} from '@angular/common/http';
+import { SeancesComponent } from './components/seances/seances.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
     RegisterComponent,
     MoviesComponent,
     MoviesComponent,
+    SeancesComponent,
   ],
   imports: [
     BrowserModule,

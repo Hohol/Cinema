@@ -3,11 +3,10 @@ package cinema.movie;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "movie")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    public Long id;
     public String title;
     public int durationMinutes;
     public int baseTicketPrice;

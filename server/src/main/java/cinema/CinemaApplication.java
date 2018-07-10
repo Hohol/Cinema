@@ -1,11 +1,10 @@
 package cinema;
 
 import cinema.movie.*;
+import cinema.seance.*;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.stream.Stream;
 
 @SpringBootApplication
 public class CinemaApplication {
@@ -15,14 +14,14 @@ public class CinemaApplication {
     }
 
     @Bean
-    ApplicationRunner init(MovieRepository repository) {
+    ApplicationRunner init(MovieRepository repository, SeanceRepository seanceRepository) {
         return args -> {
-            Stream.of(
-                    new Movie("Побег из Шоушенка", 120, 300),
-                    new Movie("Зеленая миля", 135, 260),
-                    new Movie("Матрица", 105, 350)
-            ).forEach(repository::save);
-            repository.findAll().forEach(System.out::println);
+            Movie movie1 = repository.save(new Movie("Побег из Шоушенка", 120, 300));
+            Movie movie2 = repository.save(new Movie("Зеленая миля", 135, 260));
+            Movie movie3 = repository.save(new Movie("Матрица", 105, 350));
+
+            Seance seance1 = seanceRepository.save(new Seance(movie1));
+            Seance seance2 = seanceRepository.save(new Seance(movie2));
         };
     }
 }
