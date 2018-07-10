@@ -1,5 +1,10 @@
-<ul class="movies">
-  <li *ngFor="let movie of movies">
-    <span class="badge">{{movie.title}} {{movie.durationMinutes}} минут, {{movie.baseTicketPrice}} руб.</span>
-  </li>
-</ul>
+<table class="table">
+  <tbody>
+  <tr *ngFor="let movie of movies">
+    <td style="text-align: left">{{movie.title}}</td>
+    <td>{{movie.durationMinutes}} минут</td>
+    <td>{{movie.baseTicketPrice}} руб.</td>
+    <td>Сеансы</td>
+  </tr>
+  </tbody>
+</table>

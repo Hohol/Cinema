@@ -1,5 +1,8 @@
-<ul class="movies">
-  <li *ngFor="let seance of seances">
-    <span class="badge">{{seance.id}} {{seance.movie.title}}</span>
-  </li>
-</ul>
+<table class="table">
+  <tbody>
+  <tr *ngFor="let seance of seances">
+    <td>{{seance.movie.title}}</td>
+    <td>Купить билеты</td>
+  </tr>
+  </tbody>
+</table>
