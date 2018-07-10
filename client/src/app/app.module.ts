@@ -1,22 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { SingInComponent } from './sing-in/sing-in.component';
+import {AppComponent} from './app.component';
+import {RegisterComponent} from './components/register/register.component';
+import {LoginComponent} from './components/login/login.component';
 import {AppRoutingModule} from './app-routing.module';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {MoviesComponent} from './components/movies/movies.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SingInComponent,
-    SignUpComponent
+    LoginComponent,
+    RegisterComponent,
+    LoginComponent,
+    RegisterComponent,
+    MoviesComponent,
+    MoviesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    HttpModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
