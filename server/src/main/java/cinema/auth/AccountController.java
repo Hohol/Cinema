@@ -22,7 +22,7 @@ public class AccountController {
         if (userService.find(newUser.getUsername()) != null) {
             logger.error("username already exist " + newUser.getUsername());
             return new ResponseEntity<>(
-                    new CustomErrorType("user with username " + newUser.getUsername() + "already exist "),
+                    new CustomErrorType("user with username " + newUser.getUsername() + " already exist "),
                     HttpStatus.CONFLICT
             );
         }

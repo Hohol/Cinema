@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {User} from '../../model/model.user';
 import {AccountService} from '../../services/account.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
   user: User = new User();
   errorMessage: string;
 
-  constructor(public accountService: AccountService, public router: Router) {
+  constructor(public accountService: AccountService, public router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -21,7 +22,8 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.accountService.createAccount(this.user).subscribe(data => {
-        this.router.navigate(['/']);
+        this.authService.logIn(this.user)
+          .subscribe(data2 => this.router.navigate(['/']));
       }, err => {
         console.log(err);
         this.errorMessage = 'username already exist';

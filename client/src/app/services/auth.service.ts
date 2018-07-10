@@ -12,7 +12,6 @@ export class AuthService {
   }
 
   public logIn(user: User) {
-
     const headers = new Headers();
     headers.append('Accept', 'application/json');
     // creating base64 encoded String from user name and password
