@@ -3,6 +3,7 @@
   <tr *ngFor="let seance of seances">
     <td style="text-align: left">{{seance.movie.title}}</td>
     <td>{{convertDate(seance.startTime)}}</td>
+    <td>{{seance.price}} руб.</td>
     <td>Купить билеты</td>
   </tr>
   </tbody>

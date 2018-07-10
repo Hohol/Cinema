@@ -16,6 +16,9 @@ public class Seance {
 
     public Instant startTime;
 
+    @Transient
+    public int price;
+
     public Seance() {
     }
 

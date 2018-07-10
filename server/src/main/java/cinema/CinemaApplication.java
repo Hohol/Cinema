@@ -33,6 +33,25 @@ public class CinemaApplication {
                     LocalDate.of(1991, 1, 2),
                     User.Role.USER
             ));
+            User old = userRepo.save(new User(
+                    "old",
+                    "oldpassword",
+                    LocalDate.of(1980, 5, 5),
+                    User.Role.USER
+            ));
+            User young = userRepo.save(new User(
+                    "young",
+                    "youngpassword",
+                    LocalDate.of(2010, 6, 6),
+                    User.Role.USER
+            ));
+            LocalDate today = LocalDate.now();
+            User bDay = userRepo.save(new User(
+                    "bday",
+                    "bdaypassword",
+                    LocalDate.of(1990, today.getMonth().getValue(), today.getDayOfMonth()),
+                    User.Role.USER
+            ));
         };
     }
 }

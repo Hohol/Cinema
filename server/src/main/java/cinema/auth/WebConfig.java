@@ -53,7 +53,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/account/login")
                 .and()
                 .httpBasic().and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .csrf().disable();
     }
 }
