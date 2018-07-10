@@ -29,9 +29,10 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, Role role) {
         this.username = username;
         this.password = password;
+        this.role = role.toString();
     }
 
     @JsonIgnore

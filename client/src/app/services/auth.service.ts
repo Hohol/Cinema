@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, RequestOptions, Response} from '@angular/http';
+import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import {User} from '../model/model.user';
-import {AppComponent} from '../app.component';
 import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  API_URL = 'http://localhost:8090'; // todo get rid of duplication
+
   constructor(public http: Http) {
   }
 
@@ -20,7 +22,7 @@ export class AuthService {
     const options = new RequestOptions();
     options.headers = headers;
 
-    return this.http.get(AppComponent.API_URL + '/account/login', options)
+    return this.http.get(this.API_URL + '/account/login', options)
       .pipe(map((response: Response) => {
         const responseUser = response.json().principal;
         if (responseUser) {
@@ -29,10 +31,7 @@ export class AuthService {
       }));
   }
 
-  logOut() {
-    return this.http.post(AppComponent.API_URL + '/logout', {})
-      .subscribe((response: Response) => {
-        localStorage.removeItem('currentUser');
-      });
+  logOut(): Observable<Response> {
+    return this.http.post(this.API_URL + '/logout', {});
   }
 }
