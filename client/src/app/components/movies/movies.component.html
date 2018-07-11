@@ -8,34 +8,38 @@
   </tbody>
 </table>
 
-<form (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
-  <div class="row">
+<div *ngIf="currentUser && currentUser.role === 'ADMIN'">
+  <form (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
+    <div class="row">
 
-    <div class="col-md-4 mb-3">
-      <label for="title">Название</label>
-      <input type="text" class="form-control" id="title" name="title" [(ngModel)]="newMovie.title" #title="ngModel" required>
-      <div *ngIf="f.submitted && !title.valid" class="help-block">
-        Введите название
+      <div class="col-md-4 mb-3">
+        <label for="title">Название</label>
+        <input type="text" class="form-control" id="title" name="title" [(ngModel)]="newMovie.title" #title="ngModel"
+               required>
+        <div *ngIf="f.submitted && !title.valid" class="help-block">
+          Введите название
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-4 mb-3">
-      <label for="duration">Продолжительность</label>
-      <input type="number" class="form-control" id="duration" name="duration" [(ngModel)]="newMovie.durationMinutes" #duration="ngModel" required>
-      <div *ngIf="f.submitted && !duration.valid" class="help-block">
-        Введите продолжительность
+      <div class="col-md-4 mb-3">
+        <label for="duration">Продолжительность</label>
+        <input type="number" class="form-control" id="duration" name="duration" [(ngModel)]="newMovie.durationMinutes"
+               #duration="ngModel" required>
+        <div *ngIf="f.submitted && !duration.valid" class="help-block">
+          Введите продолжительность
+        </div>
       </div>
-    </div>
 
-    <div class="col-md-4 mb-3">
-      <label for="base-price">Базовая цена</label>
-      <input type="number" class="form-control" id="base-price" name="base-price" [(ngModel)]="newMovie.baseTicketPrice" #basePrice="ngModel" required>
-      <div *ngIf="f.submitted && !basePrice.valid" class="help-block">
-        Введите базовую цену
+      <div class="col-md-4 mb-3">
+        <label for="base-price">Базовая цена</label>
+        <input type="number" class="form-control" id="base-price" name="base-price"
+               [(ngModel)]="newMovie.baseTicketPrice" #basePrice="ngModel" required>
+        <div *ngIf="f.submitted && !basePrice.valid" class="help-block">
+          Введите базовую цену
+        </div>
       </div>
+
     </div>
-
-  </div>
-  <button type="submit">Добавить фильм</button>
-</form>
-
+    <button type="submit">Добавить фильм</button>
+  </form>
+</div>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {Movie} from '../../model/model.movie';
+import {User} from '../../model/model.user';
 
 @Component({
   selector: 'app-movies',
@@ -10,12 +11,14 @@ import {Movie} from '../../model/model.movie';
 export class MoviesComponent implements OnInit {
 
   movies: Movie[];
-  newMovie: Movie = new Movie();
+  newMovie = new Movie();
+  currentUser: User;
 
   constructor(private api: ApiService) {
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.updateMovies();
   }
 

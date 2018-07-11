@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   public logOut() {
     // todo real logout?
     localStorage.removeItem('currentUser');
-    this.router.navigate(['/']);
+    location.reload();
     /*this.api.logOut()
       .subscribe(r => {
         localStorage.removeItem('currentUser');
