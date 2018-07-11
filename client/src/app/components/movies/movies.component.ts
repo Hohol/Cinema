@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {Movie} from '../../model/model.movie';
 
@@ -10,11 +10,25 @@ import {Movie} from '../../model/model.movie';
 export class MoviesComponent implements OnInit {
 
   movies: Movie[];
+  newMovie: Movie = new Movie();
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService) {
+  }
 
   ngOnInit() {
+    this.updateMovies();
+  }
+
+  private updateMovies() {
     this.api.getMovies()
       .subscribe(movies => this.movies = movies);
+  }
+
+  create() {
+    this.api.createMovie(this.newMovie)
+      .subscribe(r => {
+        console.log(r);
+        this.updateMovies();
+      });
   }
 }

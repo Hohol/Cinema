@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AppComponent} from '../app.component';
 import {Movie} from '../model/model.movie';
 import {Observable} from 'rxjs';
 import {Seance} from '../model/model.seance';
@@ -25,17 +24,10 @@ export class ApiService {
   }
 
   createMovie(movie: Movie) {
-    return this.http.post<Seance[]>(ApiService.API_URL + '/movies/create', movie, this.getAuthHeaders())
-      .subscribe(r => console.log(r));
+    return this.http.post<Seance[]>(ApiService.API_URL + '/movies/create', movie, this.getAuthHeaders());
   }
 
   logIn(user: User) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Accept': 'application/json',
-        'Authorization': 'Basic ' + btoa(user.username + ':' + user.password)
-      })
-    };
     return this.http.get(ApiService.API_URL + '/account/login', this.getUserAuthHeaders(user))
       .pipe(map(response => {
         const responseUser = response['principal'];

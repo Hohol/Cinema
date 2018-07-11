@@ -1,5 +1,6 @@
 package cinema.movie;
 
+import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,9 @@ class MovieController {
     }
 
     @PostMapping("/movies/create")
-    public String create(@RequestBody Movie movie) {
+    public Map<String, String> create(@RequestBody Movie movie) {
         repository.save(movie);
-        return "Movie " + movie.title + "saved successfully";
+        System.out.println(movie);
+        return ImmutableMap.of("response", "Movie " + movie.title + " saved successfully");
     }
 }
