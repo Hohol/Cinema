@@ -14,7 +14,7 @@ import java.util.*;
 @Table(name = "users")
 @Scope("session")
 public class User implements UserDetails {
-    public static enum Role {USER}
+    public enum Role {USER, ADMIN}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,9 +66,7 @@ public class User implements UserDetails {
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(role));
-        return authorities;
+        return Collections.singleton(new SimpleGrantedAuthority(role));
     }
 
     @Override
@@ -86,7 +84,6 @@ public class User implements UserDetails {
     public String getUsername() {
         return username;
     }
-
 
     public String getRole() {
         return role;

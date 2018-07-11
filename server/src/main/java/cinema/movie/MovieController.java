@@ -3,7 +3,7 @@ package cinema.movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.*;
 
 @RestController
 class MovieController {
@@ -13,5 +13,11 @@ class MovieController {
     @GetMapping("/movies")
     public Collection<Movie> movies() {
         return repository.findAll();
+    }
+
+    @PostMapping("/movies/create")
+    public String create(@RequestBody Movie movie) {
+        repository.save(movie);
+        return "Movie " + movie.title + "saved successfully";
     }
 }

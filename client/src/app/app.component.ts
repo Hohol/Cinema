@@ -28,10 +28,14 @@ export class AppComponent implements OnInit {
   }
 
   public logOut() {
-    this.api.logOut()
+    // todo real logout?
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/']);
+    /*this.api.logOut()
       .subscribe(r => {
         localStorage.removeItem('currentUser');
         this.router.navigate(['/']);
       });
+    /**/
   }
 }

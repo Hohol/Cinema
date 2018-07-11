@@ -49,8 +49,10 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                         "/users",
                         "/seances"
                 ).permitAll()
-                .anyRequest().fullyAuthenticated().and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/account/login")
+                .antMatchers(
+                        "/movies/create"
+                ).hasAuthority("ADMIN")
+                .anyRequest().fullyAuthenticated()
                 .and()
                 .httpBasic().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

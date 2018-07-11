@@ -31,7 +31,7 @@ public class CinemaApplication {
                     "nikita",
                     "admin",
                     LocalDate.of(1991, 1, 2),
-                    User.Role.USER
+                    User.Role.ADMIN
             ));
             User old = userRepo.save(new User(
                     "old",

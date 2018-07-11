@@ -24,6 +24,11 @@ export class ApiService {
     return this.http.get<Seance[]>(ApiService.API_URL + '/seances', this.getAuthHeaders());
   }
 
+  createMovie(movie: Movie) {
+    return this.http.post<Seance[]>(ApiService.API_URL + '/movies/create', movie, this.getAuthHeaders())
+      .subscribe(r => console.log(r));
+  }
+
   logIn(user: User) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -34,7 +39,6 @@ export class ApiService {
     return this.http.get(ApiService.API_URL + '/account/login', this.getUserAuthHeaders(user))
       .pipe(map(response => {
         const responseUser = response['principal'];
-        console.log('ru = ' + responseUser);
         if (responseUser) {
           console.log(responseUser);
           localStorage.setItem('currentUser', JSON.stringify(responseUser));
