@@ -1,6 +1,8 @@
 package cinema.seance;
 
 import cinema.auth.*;
+import cinema.hall.Position;
+import cinema.ticket.*;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Collection;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -17,6 +19,8 @@ class SeanceController {
     private SeanceRepository seanceRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TicketRepository ticketRepository;
 
     @GetMapping("/seances")
     public Collection<SeanceForApi> seances(Principal principal) {
@@ -32,7 +36,14 @@ class SeanceController {
     }
 
     private SeanceForApi seanceForApi(Seance seance, Principal principal) {
-        return new SeanceForApi(seance, calculatePrice(seance, principal));
+        return new SeanceForApi(seance, calculatePrice(seance, principal), getOccupiedPositions(seance));
+    }
+
+    private List<Position> getOccupiedPositions(Seance seance) {
+        return ticketRepository.findAllBySeanceId(seance.id)
+                .stream()
+                .map(t -> t.position)
+                .collect(Collectors.toList());
     }
 
     private int calculatePrice(Seance seance, Principal principal) {

@@ -13,7 +13,7 @@ import _ from 'lodash';
 export class BuyTicketsComponent implements OnInit {
 
   private selectedColor = 'yellow';
-  private takenColor = 'red';
+  private occupiedColor = 'red';
   private vipColor = 'pink';
   private defaultColor = 'white';
 
@@ -41,6 +41,9 @@ export class BuyTicketsComponent implements OnInit {
 
   private getColor(row: number, col: number) {
     const pos = {row: row, col: col};
+    if (this.contains(this.seance.occupiedPositions, pos)) {
+      return this.occupiedColor;
+    }
     if (this.contains(this.selected, pos)) {
       return this.selectedColor;
     }
