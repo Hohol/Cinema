@@ -8,4 +8,23 @@
     </tr>
     </tbody>
   </table>
+
+  <div>
+    Экран
+  </div>
+  <table>
+    <tbody>
+    <tr *ngFor="let row of _.range(1, seance.hall.rowCnt+1)">
+      <td>
+        {{row}} ряд
+      </td>
+      <td *ngFor="let col of _.range(1, seance.hall.colCnt+1)">
+        <button (click)="click(row, col)" [ngStyle]="{'background-color': getColor(row,col)}">
+          {{col}}
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
 </div>
