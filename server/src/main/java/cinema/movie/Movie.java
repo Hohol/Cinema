@@ -6,10 +6,10 @@ import javax.persistence.*;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    public String title;
-    public int durationMinutes;
-    public int baseTicketPrice;
+    private long id;
+    private String title;
+    private int durationMinutes;
+    private int baseTicketPrice;
 
     public Movie() {
     }
@@ -28,5 +28,21 @@ public class Movie {
                 ", durationMinutes=" + durationMinutes +
                 ", baseTicketPrice=" + baseTicketPrice +
                 '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getDurationMinutes() {
+        return durationMinutes;
+    }
+
+    public int getBaseTicketPrice() {
+        return baseTicketPrice;
     }
 }

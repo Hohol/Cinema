@@ -10,16 +10,16 @@ import javax.persistence.*;
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
     @ManyToOne
-    public Seance seance;
+    private Seance seance;
 
     @ManyToOne
-    public User user;
+    private User user;
 
     @Embedded
-    public Position position;
+    private Position position;
 
     public Ticket() {
     }
@@ -28,5 +28,21 @@ public class Ticket {
         this.seance = seance;
         this.user = user;
         this.position = position;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Seance getSeance() {
+        return seance;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }

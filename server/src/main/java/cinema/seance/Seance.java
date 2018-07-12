@@ -10,15 +10,15 @@ import java.time.Instant;
 public class Seance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
     @ManyToOne
-    public Movie movie;
+    private Movie movie;
 
     @ManyToOne
-    public Hall hall;
+    private Hall hall;
 
-    public Instant startTime;
+    private Instant startTime;
 
     public Seance() {
     }
@@ -37,5 +37,21 @@ public class Seance {
                 ", hall=" + hall +
                 ", startTime=" + startTime +
                 '}';
+    }
+
+    public Hall getHall() {
+        return hall;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public Instant getStartTime() {
+        return startTime;
+    }
+
+    public long getId() {
+        return id;
     }
 }

@@ -18,10 +18,10 @@ public class SeanceForApi {
     public final List<Position> occupiedPositions;
 
     public SeanceForApi(Seance seance, int price, List<Position> occupiedPositions) {
-        this.id = seance.id;
-        this.movie = seance.movie;
-        this.hall = seance.hall;
-        this.startTime = seance.startTime;
+        this.id = seance.getId();
+        this.movie = seance.getMovie();
+        this.hall = seance.getHall();
+        this.startTime = seance.getStartTime();
         this.price = price;
         this.occupiedPositions = occupiedPositions;
     }

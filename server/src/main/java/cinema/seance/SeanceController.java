@@ -3,7 +3,6 @@ package cinema.seance;
 import cinema.auth.*;
 import cinema.hall.Position;
 import cinema.ticket.*;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,15 +30,15 @@ class SeanceController {
 
     @GetMapping("/seance/{id}")
     public SeanceForApi seance(Principal principal, @PathVariable("id") long id) {
-        Seance seance = (Seance) Hibernate.unproxy(seanceRepository.getOne(id));
+        Seance seance = seanceRepository.getOne(id);
         return seanceForApi(seance, principal);
     }
 
     @PostMapping("/seance/calculate-price/{id}")
     public int getPrice(Principal principal, @PathVariable("id") long id, @RequestBody List<Position> selected) {
         int sumPrice = 0;
-        Seance seance = (Seance) Hibernate.unproxy(seanceRepository.getOne(id));
-        Set<Position> vip = new HashSet<>(seance.hall.vipPositions);
+        Seance seance = seanceRepository.getOne(id);
+        Set<Position> vip = new HashSet<>(seance.getHall().vipPositions);
         Set<Position> occupied = new HashSet<>(getOccupiedPositions(seance));
         for (Position pos : selected) {
             if (occupied.contains(pos)) {
@@ -47,7 +46,7 @@ class SeanceController {
             }
             double price = calculateFixedPrice(seance, principal);
             if (vip.contains(pos)) {
-                price *= seance.hall.vipFactor;
+                price *= seance.getHall().getVipFactor();
             }
             sumPrice += Math.round(price);
         }
@@ -59,14 +58,14 @@ class SeanceController {
     }
 
     private List<Position> getOccupiedPositions(Seance seance) {
-        return ticketRepository.findAllBySeanceId(seance.id)
+        return ticketRepository.findAllBySeanceId(seance.getId())
                 .stream()
-                .map(t -> t.position)
+                .map(Ticket::getPosition)
                 .collect(Collectors.toList());
     }
 
     private int calculateFixedPrice(Seance seance, Principal principal) {
-        return (int) Math.round(seance.movie.baseTicketPrice * getDiscountFactor(principal));
+        return (int) Math.round(seance.getMovie().getBaseTicketPrice() * getDiscountFactor(principal));
     }
 
     private double getDiscountFactor(Principal principal) {

@@ -7,14 +7,14 @@ import java.util.List;
 public class Hall {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
-    public String name;
+    private String name;
 
-    public double vipFactor;
+    private double vipFactor;
 
-    public int rowCnt;
-    public int colCnt;
+    private int rowCnt;
+    private int colCnt;
 
     @ElementCollection
     public List<Position> vipPositions;
@@ -39,5 +39,29 @@ public class Hall {
                 ", colCnt=" + colCnt +
                 ", vipPositions=" + vipPositions +
                 '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getVipFactor() {
+        return vipFactor;
+    }
+
+    public int getRowCnt() {
+        return rowCnt;
+    }
+
+    public int getColCnt() {
+        return colCnt;
+    }
+
+    public List<Position> getVipPositions() {
+        return vipPositions;
     }
 }
