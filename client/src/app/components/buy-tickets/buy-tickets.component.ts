@@ -12,15 +12,16 @@ import _ from 'lodash';
 })
 export class BuyTicketsComponent implements OnInit {
 
-  private selectedColor = 'yellow';
+  private selectedColor = '#ADD8E6';
   private occupiedColor = 'red';
-  private vipColor = 'pink';
+  private vipColor = 'gold';
   private defaultColor = 'white';
 
   _ = _; // о_О
 
   seance: Seance;
   selected: Position[] = [];
+  price: number;
 
   constructor(private route: ActivatedRoute, private api: ApiService) {
   }
@@ -36,7 +37,17 @@ export class BuyTicketsComponent implements OnInit {
   }
 
   private click(row: number, col: number) {
-    this.selected.push({row: row, col: col});
+    const pos = {row: row, col: col};
+    if (this.contains(this.seance.occupiedPositions, pos)) {
+      return;
+    }
+    if (!this.contains(this.selected, pos)) {
+      this.selected.push(pos);
+    } else {
+      _.remove(this.selected, pos);
+    }
+    this.api.calculatePrice(this.seance, this.selected)
+      .subscribe(price => this.price = price); // todo race condition
   }
 
   private getColor(row: number, col: number) {
@@ -54,6 +65,16 @@ export class BuyTicketsComponent implements OnInit {
   }
 
   private contains(ar, pos) {
-    return ar.some(p => p.row === pos.row && p.col === pos.col);
+    return _.findIndex(ar, pos) !== -1;
+  }
+
+  showSelected(): string {
+    return this.selected
+      .map(p => `Ряд ${p.row} Место ${p.col}`)
+      .join('; ');
+  }
+
+  buy() {
+
   }
 }

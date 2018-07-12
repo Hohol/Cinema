@@ -34,6 +34,7 @@ public class Seance {
         return "Seance{" +
                 "id=" + id +
                 ", movie=" + movie +
+                ", hall=" + hall +
                 ", startTime=" + startTime +
                 '}';
     }

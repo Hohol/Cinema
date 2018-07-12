@@ -12,7 +12,7 @@
   <div>
     Экран
   </div>
-  <table>
+  <table align="center">
     <tbody>
     <tr *ngFor="let row of _.range(1, seance.hall.rowCnt+1)">
       <td>
@@ -26,5 +26,31 @@
     </tr>
     </tbody>
   </table>
+
+  <div style="text-align: left">
+    <p>
+      <button [ngStyle]="{'background-color': vipColor}">&nbsp;&nbsp;</button>
+      <span>&nbsp;VIP места</span>
+    </p>
+    <p>
+      <button [ngStyle]="{'background-color': occupiedColor}">&nbsp;&nbsp;</button>
+      <span>&nbsp;Занятые места</span>
+    </p>
+    <p>
+      <button [ngStyle]="{'background-color': selectedColor}">&nbsp;&nbsp;</button>
+      <span>&nbsp;Выбранные вами места</span>
+    </p>
+    <p>
+      <span>{{showSelected()}}</span>
+    </p>
+    <div *ngIf="selected.length > 0">
+      <p>
+        <span>Стоимость: {{price}}</span>
+      </p>
+      <p>
+        <button (click)="buy()">Купить</button>
+      </p>
+    </div>
+  </div>
 
 </div>

@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Seance} from '../model/model.seance';
 import {map} from 'rxjs/operators';
 import {User} from '../model/model.user';
+import {Position} from '../model/model.position';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class ApiService {
   getSeance(id: number) {
     return this.http.get(ApiService.API_URL + `/seance/${id}`, this.getAuthHeaders())
       .pipe(map(this.toSeance));
+  }
+
+  calculatePrice(seance: Seance, selected: Position[]): Observable<number> {
+    return this.http.post<number>(ApiService.API_URL + `/seance/calculate-price/${seance.id}`, selected);
   }
 
   toSeance(s: Seance) {

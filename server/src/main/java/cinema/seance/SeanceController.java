@@ -31,12 +31,31 @@ class SeanceController {
 
     @GetMapping("/seance/{id}")
     public SeanceForApi seance(Principal principal, @PathVariable("id") long id) {
-        Seance seance = (Seance) Hibernate.unproxy(seanceRepository.getOne(id)); // todo eager loading instead?
+        Seance seance = (Seance) Hibernate.unproxy(seanceRepository.getOne(id));
         return seanceForApi(seance, principal);
     }
 
+    @PostMapping("/seance/calculate-price/{id}")
+    public int getPrice(Principal principal, @PathVariable("id") long id, @RequestBody List<Position> selected) {
+        int sumPrice = 0;
+        Seance seance = (Seance) Hibernate.unproxy(seanceRepository.getOne(id));
+        Set<Position> vip = new HashSet<>(seance.hall.vipPositions);
+        Set<Position> occupied = new HashSet<>(getOccupiedPositions(seance));
+        for (Position pos : selected) {
+            if (occupied.contains(pos)) {
+                throw new RuntimeException("Trying to buy occupied place");
+            }
+            double price = calculateFixedPrice(seance, principal);
+            if (vip.contains(pos)) {
+                price *= seance.hall.vipFactor;
+            }
+            sumPrice += Math.round(price);
+        }
+        return sumPrice;
+    }
+
     private SeanceForApi seanceForApi(Seance seance, Principal principal) {
-        return new SeanceForApi(seance, calculatePrice(seance, principal), getOccupiedPositions(seance));
+        return new SeanceForApi(seance, calculateFixedPrice(seance, principal), getOccupiedPositions(seance));
     }
 
     private List<Position> getOccupiedPositions(Seance seance) {
@@ -46,7 +65,7 @@ class SeanceController {
                 .collect(Collectors.toList());
     }
 
-    private int calculatePrice(Seance seance, Principal principal) {
+    private int calculateFixedPrice(Seance seance, Principal principal) {
         return (int) Math.round(seance.movie.baseTicketPrice * getDiscountFactor(principal));
     }
 
