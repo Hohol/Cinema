@@ -1,7 +1,7 @@
 package cinema.hall;
 
 import javax.persistence.*;
-import java.util.Arrays;
+import java.util.List;
 
 @Entity
 public class Hall {
@@ -16,12 +16,13 @@ public class Hall {
     public int rowCnt;
     public int colCnt;
 
-    public Position[] vipPositions;
+    @ElementCollection
+    public List<Position> vipPositions;
 
     public Hall() {
     }
 
-    public Hall(String name, double vipFactor, int rowCnt, int colCnt, Position[] vipPositions) {
+    public Hall(String name, double vipFactor, int rowCnt, int colCnt, List<Position> vipPositions) {
         this.name = name;
         this.vipFactor = vipFactor;
         this.rowCnt = rowCnt;
@@ -36,7 +37,7 @@ public class Hall {
                 ", name='" + name + '\'' +
                 ", rowCnt=" + rowCnt +
                 ", colCnt=" + colCnt +
-                ", vipPositions=" + Arrays.toString(vipPositions) +
+                ", vipPositions=" + vipPositions +
                 '}';
     }
 }

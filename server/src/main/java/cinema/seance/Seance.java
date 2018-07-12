@@ -20,9 +20,6 @@ public class Seance {
 
     public Instant startTime;
 
-    @Transient
-    public int price;
-
     public Seance() {
     }
 
@@ -38,7 +35,6 @@ public class Seance {
                 "id=" + id +
                 ", movie=" + movie +
                 ", startTime=" + startTime +
-                ", price=" + price +
                 '}';
     }
 }

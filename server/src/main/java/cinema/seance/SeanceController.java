@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.*;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 @RestController
 class SeanceController {
@@ -18,29 +19,31 @@ class SeanceController {
     private UserRepository userRepository;
 
     @GetMapping("/seances")
-    public Collection<Seance> seances(Principal principal) {
-        List<Seance> seances = seanceRepository.findAll();
-        for (Seance seance : seances) {
-            setPrice(seance, principal);
-        }
-        return seances;
+    public Collection<SeanceForApi> seances(Principal principal) {
+        return seanceRepository.findAll().stream()
+                .map(s -> seanceForApi(s, principal))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/seance/{id}")
-    public Seance seance(Principal principal, @PathVariable("id") long id) {
-        Seance seance = (Seance)Hibernate.unproxy(seanceRepository.getOne(id)); // todo eager loading instead?
-        setPrice(seance, principal);
-        return seance;
+    public SeanceForApi seance(Principal principal, @PathVariable("id") long id) {
+        Seance seance = (Seance) Hibernate.unproxy(seanceRepository.getOne(id)); // todo eager loading instead?
+        return seanceForApi(seance, principal);
     }
 
-    private void setPrice(Seance seance, Principal principal) {
-        if (principal != null) {
-            User user = userRepository.findOneByUsername(principal.getName());
-            seance.price = calculatePrice(seance, user);
+    private SeanceForApi seanceForApi(Seance seance, Principal principal) {
+        return new SeanceForApi(seance, calculatePrice(seance, principal));
+    }
+
+    private int calculatePrice(Seance seance, Principal principal) {
+        return (int) Math.round(seance.movie.baseTicketPrice * getDiscountFactor(principal));
+    }
+
+    private double getDiscountFactor(Principal principal) {
+        if (principal == null) {
+            return 1;
         }
-    }
-
-    private int calculatePrice(Seance seance, User user) {
+        User user = userRepository.findOneByUsername(principal.getName());
         double factor = 1;
         LocalDate today = LocalDate.now();
         if (today.getDayOfYear() == user.getBirthday().getDayOfYear()) {
@@ -49,6 +52,6 @@ class SeanceController {
         if (ChronoUnit.YEARS.between(user.getBirthday(), today) < 14) {
             factor -= 0.25;
         }
-        return (int) (seance.movie.baseTicketPrice * factor);
+        return factor;
     }
 }

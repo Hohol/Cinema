@@ -4,6 +4,7 @@ import cinema.auth.*;
 import cinema.hall.*;
 import cinema.movie.*;
 import cinema.seance.*;
+import com.google.common.collect.ImmutableList;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -33,21 +34,21 @@ public class CinemaApplication {
             Hall hall1 = hallRepo.save(new Hall(
                     "hall1", 1.5,
                     5, 10,
-                    new Position[]{
+                    ImmutableList.of(
                             new Position(3, 3),
                             new Position(3, 4)
-                    }
+                    )
             ));
 
             Hall hall2 = hallRepo.save(new Hall(
                     "hall2", 1.2,
                     6, 15,
-                    new Position[]{
+                    ImmutableList.of(
                             new Position(3, 3),
                             new Position(3, 4),
                             new Position(3, 5),
-                            new Position(3, 6),
-                    }
+                            new Position(3, 6)
+                    )
             ));
 
             Seance seance1 = seanceRepo.save(new Seance(movie1, hall1, Instant.now().plus(3, ChronoUnit.DAYS)));
