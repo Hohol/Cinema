@@ -1,5 +1,6 @@
 package cinema.seance;
 
+import cinema.hall.Hall;
 import cinema.movie.Movie;
 
 import javax.persistence.*;
@@ -14,6 +15,9 @@ public class Seance {
     @ManyToOne
     public Movie movie;
 
+    @ManyToOne
+    public Hall hall;
+
     public Instant startTime;
 
     @Transient
@@ -22,8 +26,9 @@ public class Seance {
     public Seance() {
     }
 
-    public Seance(Movie movie, Instant startTime) {
+    public Seance(Movie movie, Hall hall, Instant startTime) {
         this.movie = movie;
+        this.hall = hall;
         this.startTime = startTime;
     }
 
