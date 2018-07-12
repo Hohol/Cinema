@@ -20,7 +20,20 @@ export class ApiService {
   }
 
   getSeances() {
-    return this.http.get<Seance[]>(ApiService.API_URL + '/seances', this.getAuthHeaders());
+    return this.http.get<Seance[]>(ApiService.API_URL + '/seances', this.getAuthHeaders())
+      .pipe(map(seances => {
+          return seances.map(this.toSeance);
+        }
+      ));
+  }
+
+  getSeance(id: number) {
+    return this.http.get(ApiService.API_URL + `/seance/${id}`, this.getAuthHeaders())
+      .pipe(map(this.toSeance));
+  }
+
+  toSeance(s: Seance) {
+    return Object.assign(new Seance(), s);
   }
 
   createMovie(movie: Movie) {

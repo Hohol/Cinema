@@ -1,6 +1,7 @@
 package cinema.seance;
 
 import cinema.auth.*;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,13 +20,24 @@ class SeanceController {
     @GetMapping("/seances")
     public Collection<Seance> seances(Principal principal) {
         List<Seance> seances = seanceRepository.findAll();
-        if (principal != null) {
-            User user = userRepository.findOneByUsername(principal.getName());
-            for (Seance seance : seances) {
-                seance.price = calculatePrice(seance, user);
-            }
+        for (Seance seance : seances) {
+            setPrice(seance, principal);
         }
         return seances;
+    }
+
+    @GetMapping("/seance/{id}")
+    public Seance seance(Principal principal, @PathVariable("id") long id) {
+        Seance seance = (Seance)Hibernate.unproxy(seanceRepository.getOne(id)); // todo eager loading instead?
+        setPrice(seance, principal);
+        return seance;
+    }
+
+    private void setPrice(Seance seance, Principal principal) {
+        if (principal != null) {
+            User user = userRepository.findOneByUsername(principal.getName());
+            seance.price = calculatePrice(seance, user);
+        }
     }
 
     private int calculatePrice(Seance seance, User user) {

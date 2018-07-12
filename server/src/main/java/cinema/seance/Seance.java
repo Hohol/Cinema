@@ -26,4 +26,14 @@ public class Seance {
         this.movie = movie;
         this.startTime = startTime;
     }
+
+    @Override
+    public String toString() {
+        return "Seance{" +
+                "id=" + id +
+                ", movie=" + movie +
+                ", startTime=" + startTime +
+                ", price=" + price +
+                '}';
+    }
 }

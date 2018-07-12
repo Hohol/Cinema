@@ -2,9 +2,9 @@
   <tbody>
   <tr *ngFor="let seance of seances">
     <td style="text-align: left">{{seance.movie.title}}</td>
-    <td>{{convertDate(seance.startTime)}}</td>
+    <td>{{seance.formattedStartTime()}}</td>
     <td>{{seance.price}} руб.</td>
-    <td>Купить билеты</td>
+    <td><a routerLink="/seances/buy/{{seance.id}}">Купить билеты</a></td>
   </tr>
   </tbody>
 </table>

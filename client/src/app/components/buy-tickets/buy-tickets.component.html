@@ -1,0 +1,11 @@
+<div *ngIf="seance">
+  <table class="table">
+    <tbody>
+    <tr>
+      <td>{{seance.movie.title}}</td>
+      <td>{{seance.formattedStartTime()}}</td>
+      <td>{{seance.price}} руб.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

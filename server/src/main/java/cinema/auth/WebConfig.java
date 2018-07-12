@@ -46,7 +46,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                         "/logout",
                         "/movies",
                         "/users",
-                        "/seances"
+                        "/seances",
+                        "/seance/{id}"
                 ).permitAll()
                 .antMatchers(
                         "/movies/create"
