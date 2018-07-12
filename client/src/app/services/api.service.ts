@@ -17,24 +17,21 @@ export class ApiService {
   }
 
   getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(ApiService.API_URL + '/movies', this.getAuthHeaders());
+    return this.get<Movie[]>('/movies');
   }
 
   getSeances() {
-    return this.http.get<Seance[]>(ApiService.API_URL + '/seances', this.getAuthHeaders())
-      .pipe(map(seances => {
-          return seances.map(this.toSeance);
-        }
-      ));
+    return this.get<Seance[]>('/seances')
+      .pipe(map(seances => seances.map(this.toSeance)));
   }
 
   getSeance(id: number) {
-    return this.http.get(ApiService.API_URL + `/seance/${id}`, this.getAuthHeaders())
+    return this.get(`/seance/${id}`)
       .pipe(map(this.toSeance));
   }
 
   calculatePrice(seance: Seance, selected: Position[]): Observable<number> {
-    return this.http.post<number>(ApiService.API_URL + `/seance/calculate-price/${seance.id}`, selected);
+    return this.post<number>(`/seance/calculate-price/${seance.id}`, selected);
   }
 
   toSeance(s: Seance) {
@@ -42,7 +39,7 @@ export class ApiService {
   }
 
   createMovie(movie: Movie) {
-    return this.http.post<Seance[]>(ApiService.API_URL + '/movies/create', movie, this.getAuthHeaders());
+    return this.post<Seance[]>('/movies/create', movie);
   }
 
   logIn(user: User) {
@@ -56,12 +53,16 @@ export class ApiService {
       }));
   }
 
-  logOut() {
-    return this.http.post(ApiService.API_URL + '/logout', {});
-  }
-
   createAccount(user: User) {
     return this.http.post(ApiService.API_URL + '/account/register', user);
+  }
+
+  private get<T>(url) {
+    return this.http.get<T>(ApiService.API_URL + url, this.getAuthHeaders());
+  }
+
+  private post<T>(url, body) {
+    return this.http.post<T>(ApiService.API_URL + url, body, this.getAuthHeaders());
   }
 
   private getAuthHeaders() {
