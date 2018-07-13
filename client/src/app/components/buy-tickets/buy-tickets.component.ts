@@ -4,6 +4,7 @@ import {Seance} from '../../model/model.seance';
 import {ApiService} from '../../services/api.service';
 import {Position} from '../../model/model.position';
 import _ from 'lodash';
+import {MessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-buy-tickets',
@@ -23,7 +24,7 @@ export class BuyTicketsComponent implements OnInit {
   selected: Position[] = [];
   price: number;
 
-  constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) {
+  constructor(private route: ActivatedRoute, private api: ApiService, private router: Router, private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -79,6 +80,7 @@ export class BuyTicketsComponent implements OnInit {
     this.api.buyTickets(this.seance, this.selected)
       .subscribe(r => {
         console.log(r);
+        this.messageService.setMessage('Билеты куплены');
         this.router.navigate(['/']);
       });
   }

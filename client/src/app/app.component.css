@@ -11,3 +11,12 @@ body {
   margin-bottom: 1rem;
 }
 
+.alert-fixed {
+  position:fixed;
+  bottom: 0;
+  left: 33%;
+  width: 33%;
+  z-index:9999;
+  border-radius:0;
+  vertical-align: center;
+}

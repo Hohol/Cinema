@@ -34,4 +34,14 @@
   <div class="starter-template">
     <router-outlet></router-outlet>
   </div>
+
+  <div *ngIf="messageService.message">
+    <div class="alert alert-success alert-dismissible fade show alert-fixed" role="alert">
+      <span>{{messageService.message}}</span>
+      <button class="close" (click)="messageService.clear()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+
 </main>

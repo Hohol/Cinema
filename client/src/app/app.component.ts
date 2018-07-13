@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {User} from './model/model.user';
 import {NavigationStart, Router} from '@angular/router';
 import {ApiService} from './services/api.service';
+import {MessageService} from './services/message.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import {ApiService} from './services/api.service';
 export class AppComponent implements OnInit {
   currentUser: User;
 
-  constructor(private router: Router, private api: ApiService) {
+  constructor(private router: Router, private api: ApiService, public messageService: MessageService) {
   }
 
   private updateCurrentUser() {
