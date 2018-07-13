@@ -51,7 +51,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                         "/seance/calculate-price/{id}"
                 ).permitAll()
                 .antMatchers(
-                        "/movies/create"
+                        "/movies/create",
+                        "/users"
                 ).hasAuthority("ADMIN")
                 .anyRequest().fullyAuthenticated()
                 .and()

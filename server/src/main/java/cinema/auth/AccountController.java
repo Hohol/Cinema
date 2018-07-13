@@ -39,7 +39,7 @@ public class AccountController {
         return principal;
     }
 
-    @RequestMapping("/users") // todo only admin should be able to see it
+    @RequestMapping("/users")
     public Collection<User> users() {
         return userService.findAll();
     }
