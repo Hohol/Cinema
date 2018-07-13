@@ -34,6 +34,10 @@ export class ApiService {
     return this.post<number>(`/seance/calculate-price/${seance.id}`, selected);
   }
 
+  buyTickets(seance: Seance, selected: Position[]) {
+    return this.post(`/seance/buy/${seance.id}`, selected);
+  }
+
   toSeance(s: Seance) {
     return Object.assign(new Seance(), s);
   }

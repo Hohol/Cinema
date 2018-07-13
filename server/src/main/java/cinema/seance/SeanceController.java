@@ -3,7 +3,9 @@ package cinema.seance;
 import cinema.auth.*;
 import cinema.hall.Position;
 import cinema.ticket.*;
+import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -35,9 +37,9 @@ class SeanceController {
     }
 
     @PostMapping("/seance/calculate-price/{id}")
-    public int getPrice(Principal principal, @PathVariable("id") long id, @RequestBody List<Position> selected) {
+    public int getPrice(Principal principal, @PathVariable("id") long seanceId, @RequestBody List<Position> selected) {
         int sumPrice = 0;
-        Seance seance = seanceRepository.getOne(id);
+        Seance seance = seanceRepository.getOne(seanceId);
         Set<Position> vip = new HashSet<>(seance.getHall().vipPositions);
         Set<Position> occupied = new HashSet<>(getOccupiedPositions(seance));
         for (Position pos : selected) {
@@ -51,6 +53,18 @@ class SeanceController {
             sumPrice += Math.round(price);
         }
         return sumPrice;
+    }
+
+    @PostMapping("/seance/buy/{id}")
+    @Transactional
+    public Map<String, String> buy(Principal principal, @PathVariable("id") long seanceId, @RequestBody List<Position> selected) {
+        User user = principal == null ? null : userRepository.findOneByUsername(principal.getName());
+        Seance seance = seanceRepository.getOne(seanceId);
+        List<Ticket> tickets = selected.stream()
+                .map(pos -> new Ticket(seance, user, pos))
+                .collect(Collectors.toList());
+        ticketRepository.saveAll(tickets);
+        return ImmutableMap.of("response", "tickets bought successfully");
     }
 
     private SeanceForApi seanceForApi(Seance seance, Principal principal) {

@@ -4,6 +4,7 @@ import cinema.auth.User;
 import cinema.hall.Position;
 import cinema.seance.Seance;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +17,7 @@ public class Ticket {
     private Seance seance;
 
     @ManyToOne
+    @Nullable
     private User user;
 
     @Embedded

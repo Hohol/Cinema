@@ -48,7 +48,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                         "/users",
                         "/seances",
                         "/seance/{id}",
-                        "/seance/calculate-price/{id}"
+                        "/seance/calculate-price/{id}",
+                        "/seance/buy/{id}"
                 ).permitAll()
                 .antMatchers(
                         "/movies/create",

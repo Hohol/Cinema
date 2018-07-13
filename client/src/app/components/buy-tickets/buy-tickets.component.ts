@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Seance} from '../../model/model.seance';
 import {ApiService} from '../../services/api.service';
 import {Position} from '../../model/model.position';
@@ -23,7 +23,7 @@ export class BuyTicketsComponent implements OnInit {
   selected: Position[] = [];
   price: number;
 
-  constructor(private route: ActivatedRoute, private api: ApiService) {
+  constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) {
   }
 
   ngOnInit() {
@@ -75,6 +75,11 @@ export class BuyTicketsComponent implements OnInit {
   }
 
   buy() {
-
+    // todo block UI until response?
+    this.api.buyTickets(this.seance, this.selected)
+      .subscribe(r => {
+        console.log(r);
+        this.router.navigate(['/']);
+      });
   }
 }
