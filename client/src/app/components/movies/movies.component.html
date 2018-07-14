@@ -3,7 +3,9 @@
   <tr *ngFor="let movie of movies">
     <td style="text-align: left">{{movie.title}}</td>
     <td>{{movie.durationMinutes}} минут</td>
-    <td>Сеансы</td>
+    <td>
+      <a routerLink="/seances" [queryParams]="{ movieId: movie.id }">Сеансы</a>
+    </td>
   </tr>
   </tbody>
 </table>

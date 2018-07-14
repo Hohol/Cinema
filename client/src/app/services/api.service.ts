@@ -20,8 +20,9 @@ export class ApiService {
     return this.get<Movie[]>('/movies');
   }
 
-  getSeances() {
-    return this.get<Seance[]>('/seances')
+  getSeances(movieId?: number) {
+    const url = '/seances' + (movieId ? `?movieId=${movieId}` : '');
+    return this.get<Seance[]>(url)
       .pipe(map(seances => seances.map(this.toSeance)));
   }
 

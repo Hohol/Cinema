@@ -24,8 +24,17 @@ class SeanceController {
     private TicketRepository ticketRepository;
 
     @GetMapping("/seances")
-    public Collection<SeanceForApi> seances(Principal principal) {
-        return seanceRepository.findAll().stream()
+    public Collection<SeanceForApi> seances(
+            Principal principal,
+            @RequestParam(value = "movieId", required = false) Long movieId
+    ) {
+        Collection<Seance> seances;
+        if (movieId != null) {
+            seances = seanceRepository.findAllByMovieId(movieId);
+        } else {
+            seances = seanceRepository.findAll();
+        }
+        return seances.stream()
                 .map(s -> seanceForApi(s, principal))
                 .collect(Collectors.toList());
     }
