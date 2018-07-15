@@ -3,6 +3,7 @@ package cinema.seance;
 import cinema.auth.*;
 import cinema.hall.Position;
 import cinema.ticket.*;
+import com.google.common.base.Verify;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,14 +48,12 @@ class SeanceController {
 
     @PostMapping("/seance/calculate-price/{id}")
     public int getPrice(Principal principal, @PathVariable("id") long seanceId, @RequestBody List<Position> selected) {
-        int sumPrice = 0;
         Seance seance = seanceRepository.getOne(seanceId);
-        Set<Position> vip = new HashSet<>(seance.getHall().vipPositions);
         Set<Position> occupied = new HashSet<>(getOccupiedPositions(seance));
+        Verify.verify(Collections.disjoint(selected, occupied), "Trying to buy occupied position");
+        Set<Position> vip = new HashSet<>(seance.getHall().vipPositions);
+        int sumPrice = 0;
         for (Position pos : selected) {
-            if (occupied.contains(pos)) {
-                throw new RuntimeException("Trying to buy occupied place");
-            }
             double price = calculateFixedPrice(seance, principal);
             if (vip.contains(pos)) {
                 price *= seance.getHall().getVipFactor();
@@ -69,6 +68,8 @@ class SeanceController {
     public Map<String, String> buy(Principal principal, @PathVariable("id") long seanceId, @RequestBody List<Position> selected) {
         User user = principal == null ? null : userRepository.findOneByUsername(principal.getName());
         Seance seance = seanceRepository.getOne(seanceId);
+        Set<Position> occupied = new HashSet<>(getOccupiedPositions(seance));
+        Verify.verify(Collections.disjoint(selected, occupied), "Trying to buy occupied position");
         List<Ticket> tickets = selected.stream()
                 .map(pos -> new Ticket(seance, user, pos))
                 .collect(Collectors.toList());
