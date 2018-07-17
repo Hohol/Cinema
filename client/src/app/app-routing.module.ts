@@ -7,12 +7,14 @@ import {SeancesComponent} from './components/seances/seances.component';
 import {BuyTicketsComponent} from './components/buy-tickets/buy-tickets.component';
 import {UsersComponent} from './components/users/users.component';
 import {UserStatsComponent} from './components/user-stats/user-stats.component';
+import {SeanceStatsComponent} from './components/seance-stats/seance-stats.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/movies', pathMatch: 'full'},
   {path: 'movies', component: MoviesComponent},
   {path: 'seances', component: SeancesComponent},
   {path: 'seances/buy/:id', component: BuyTicketsComponent},
+  {path: 'seances/:id', component: SeanceStatsComponent},
   {path: 'users', component: UsersComponent},
   {path: 'user/:id', component: UserStatsComponent},
   {path: 'login', component: LoginComponent},

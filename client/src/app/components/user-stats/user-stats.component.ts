@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class UserStatsComponent implements OnInit {
 
-  public userStats: UserStats;
+  userStats: UserStats;
 
   constructor(private api: ApiService, private route: ActivatedRoute) {
   }

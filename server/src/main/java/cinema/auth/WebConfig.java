@@ -54,7 +54,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/movies/create",
                         "/users",
-                        "/user/{id}"
+                        "/user/{id}",
+                        "/seance-stats/{id}"
                 ).hasAuthority("ADMIN")
                 .anyRequest().fullyAuthenticated()
                 .and()

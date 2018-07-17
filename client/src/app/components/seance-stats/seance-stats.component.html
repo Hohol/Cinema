@@ -1,0 +1,12 @@
+<div *ngIf="seanceStats">
+  <p> {{seanceStats.seance.movie.title}}</p>
+  <p>Купленные билеты</p>
+  <table class="table">
+    <tbody>
+    <tr *ngFor="let ticket of seanceStats.tickets">
+      <td>{{ticket.user.username}}</td>
+      <td>ряд {{ticket.position.row}}, место {{ticket.position.col}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

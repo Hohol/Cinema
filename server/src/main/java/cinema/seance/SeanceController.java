@@ -77,6 +77,14 @@ class SeanceController {
         return ImmutableMap.of("response", "tickets bought successfully");
     }
 
+    @GetMapping("/seance-stats/{id}")
+    @Transactional
+    public SeanceStats seanceStats(Principal principal, @PathVariable("id") long seanceId) {
+        Seance seance = seanceRepository.getOne(seanceId);
+        List<Ticket> tickets = ticketRepository.findAllBySeanceId(seanceId);
+        return new SeanceStats(seance, tickets);
+    }
+
     private SeanceForApi seanceForApi(Seance seance, Principal principal) {
         return new SeanceForApi(seance, calculateFixedPrice(seance, principal), getOccupiedPositions(seance));
     }

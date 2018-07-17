@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import {User} from '../model/model.user';
 import {Position} from '../model/model.position';
 import {UserStats} from '../model/model.user-stats';
+import {SeanceStats} from '../model/model.seance-stats';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class ApiService {
   getSeance(id: number) {
     return this.get(`/seance/${id}`)
       .pipe(map(this.toSeance));
+  }
+
+  getSeanceStats(seanceId: number): Observable<SeanceStats> {
+    return this.get(`/seance-stats/${seanceId}`);
   }
 
   calculatePrice(seance: Seance, selected: Position[]): Observable<number> {
