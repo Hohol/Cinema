@@ -1,6 +1,6 @@
 package cinema.auth;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +13,7 @@ import java.util.*;
 @Entity
 @Table(name = "users")
 @Scope("session")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User implements UserDetails {
     public enum Role {USER, ADMIN}
 

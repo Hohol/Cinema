@@ -6,6 +6,7 @@ import {MoviesComponent} from './components/movies/movies.component';
 import {SeancesComponent} from './components/seances/seances.component';
 import {BuyTicketsComponent} from './components/buy-tickets/buy-tickets.component';
 import {UsersComponent} from './components/users/users.component';
+import {UserStatsComponent} from './components/user-stats/user-stats.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/movies', pathMatch: 'full'},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'seances', component: SeancesComponent},
   {path: 'seances/buy/:id', component: BuyTicketsComponent},
   {path: 'users', component: UsersComponent},
+  {path: 'user/:id', component: UserStatsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
 ];

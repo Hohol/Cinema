@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {BuyTicketsComponent} from './components/buy-tickets/buy-tickets.component';
 import {UsersComponent} from './components/users/users.component';
+import { UserStatsComponent } from './components/user-stats/user-stats.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {UsersComponent} from './components/users/users.component';
     SeancesComponent,
     BuyTicketsComponent,
     UsersComponent,
+    UserStatsComponent,
   ],
   imports: [
     BrowserModule,

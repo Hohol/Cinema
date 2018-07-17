@@ -8,5 +8,6 @@ import java.util.List;
 @RepositoryRestResource
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findAllBySeanceId(long seanceId);
+    List<Ticket> findAllByUserId(long userId);
 }
 

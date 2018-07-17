@@ -5,7 +5,7 @@
     <td>{{user.birthday}}</td>
     <td>{{user.role}}</td>
     <td>
-      <a routerLink="/" [queryParams]="{ movieId: user.id }">Купленные билеты</a>
+      <a routerLink="/user/{{user.id}}">Статистика пользователя</a>
     </td>
   </tr>
   </tbody>

@@ -1,0 +1,18 @@
+<div *ngIf="userStats">
+  <p>Пользователь {{userStats.user.username}}</p>
+  <p>Купленные билеты</p>
+  <table class="table">
+    <tbody>
+    <tr>
+      <th style="text-align: left">Фильм</th>
+      <th>Начало сеанса</th>
+      <th>Место</th>
+    </tr>
+    <tr *ngFor="let ticket of userStats.tickets">
+      <td style="text-align: left">{{ticket.seance.movie.title}}</td>
+      <td>{{ticket.seance.startTime | date:'medium'}}</td>
+      <td>ряд {{ticket.position.row}}, место {{ticket.position.col}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

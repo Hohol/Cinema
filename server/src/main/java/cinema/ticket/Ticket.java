@@ -3,11 +3,13 @@ package cinema.ticket;
 import cinema.auth.User;
 import cinema.hall.Position;
 import cinema.seance.Seance;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

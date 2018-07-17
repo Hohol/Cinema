@@ -1,11 +1,10 @@
 package cinema.hall;
 
 import javax.persistence.Embeddable;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class Position implements Serializable {
+public class Position {
     private int row;
     private int col;
 
