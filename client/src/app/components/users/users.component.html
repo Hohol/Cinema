@@ -1,0 +1,12 @@
+<table class="table">
+  <tbody>
+  <tr *ngFor="let user of users">
+    <td style="text-align: left">{{user.username}}</td>
+    <td>{{user.birthday}}</td>
+    <td>{{user.role}}</td>
+    <td>
+      <a routerLink="/" [queryParams]="{ movieId: user.id }">Купленные билеты</a>
+    </td>
+  </tr>
+  </tbody>
+</table>

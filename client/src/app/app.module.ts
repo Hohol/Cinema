@@ -13,6 +13,7 @@ import {MatDatepickerModule, MatInputModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {BuyTicketsComponent} from './components/buy-tickets/buy-tickets.component';
+import {UsersComponent} from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {BuyTicketsComponent} from './components/buy-tickets/buy-tickets.componen
     MoviesComponent,
     SeancesComponent,
     BuyTicketsComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

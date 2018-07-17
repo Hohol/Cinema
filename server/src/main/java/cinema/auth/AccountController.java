@@ -38,9 +38,4 @@ public class AccountController {
         logger.info("user logged " + principal);
         return principal;
     }
-
-    @RequestMapping("/users")
-    public Collection<User> users() {
-        return userService.findAll();
-    }
 }

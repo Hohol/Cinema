@@ -47,6 +47,10 @@ export class ApiService {
     return this.post<Seance[]>('/movies/create', movie);
   }
 
+  getUsers(): Observable<User[]> {
+    return this.get<User[]>('/users');
+  }
+
   logIn(user: User) {
     return this.http.get(ApiService.API_URL + '/account/login', this.getUserAuthHeaders(user))
       .pipe(map(response => {
