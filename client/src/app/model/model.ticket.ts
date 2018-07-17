@@ -7,4 +7,5 @@ export class Ticket {
   seance: Seance;
   user: User;
   position: Position;
+  price: number;
 }

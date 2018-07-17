@@ -71,7 +71,7 @@ class SeanceController {
         Set<Position> occupied = new HashSet<>(getOccupiedPositions(seance));
         Verify.verify(Collections.disjoint(selected, occupied), "Trying to buy occupied position");
         List<Ticket> tickets = selected.stream()
-                .map(pos -> new Ticket(seance, user, pos))
+                .map(pos -> new Ticket(seance, user, pos, 0))
                 .collect(Collectors.toList());
         ticketRepository.saveAll(tickets);
         return ImmutableMap.of("response", "tickets bought successfully");

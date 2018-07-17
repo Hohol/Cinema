@@ -25,13 +25,16 @@ public class Ticket {
     @Embedded
     private Position position;
 
+    private int price;
+
     public Ticket() {
     }
 
-    public Ticket(Seance seance, User user, Position position) {
+    public Ticket(Seance seance, User user, Position position, int price) {
         this.seance = seance;
         this.user = user;
         this.position = position;
+        this.price = price;
     }
 
     public long getId() {
@@ -48,5 +51,9 @@ public class Ticket {
 
     public Position getPosition() {
         return position;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

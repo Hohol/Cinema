@@ -82,12 +82,12 @@ public class CinemaApplication {
                     User.Role.USER
             ));
 
-            Ticket ticket1 = ticketRepo.save(new Ticket(seance1, young, new Position(1, 1)));
-            Ticket ticket2 = ticketRepo.save(new Ticket(seance1, young, new Position(1, 2)));
-            Ticket ticket3 = ticketRepo.save(new Ticket(seance1, young, new Position(1, 3)));
+            Ticket ticket1 = ticketRepo.save(new Ticket(seance1, young, new Position(1, 1), 100));
+            Ticket ticket2 = ticketRepo.save(new Ticket(seance1, young, new Position(1, 2), 120));
+            Ticket ticket3 = ticketRepo.save(new Ticket(seance1, young, new Position(1, 3), 150));
 
-            Ticket ticket4 = ticketRepo.save(new Ticket(seance2, old, new Position(5, 9)));
-            Ticket ticket5 = ticketRepo.save(new Ticket(seance2, old, new Position(5, 10)));
+            Ticket ticket4 = ticketRepo.save(new Ticket(seance2, old, new Position(5, 9), 200));
+            Ticket ticket5 = ticketRepo.save(new Ticket(seance2, old, new Position(5, 10), 250));
         };
     }
 }
