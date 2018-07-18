@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Movie} from '../model/model.movie';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Seance} from '../model/model.seance';
 import {map} from 'rxjs/operators';
@@ -8,18 +7,15 @@ import {User} from '../model/model.user';
 import {Position} from '../model/model.position';
 import {UserStats} from '../model/model.user-stats';
 import {SeanceStats} from '../model/model.seance-stats';
+import {BaseApiService} from './base-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
-  static API_URL = 'http://localhost:8090';
+export class ApiService extends BaseApiService {
 
-  constructor(private http: HttpClient) {
-  }
-
-  getMovies(): Observable<Movie[]> {
-    return this.get<Movie[]>('/movies');
+  constructor(http: HttpClient) {
+    super(http);
   }
 
   getSeances(movieId?: number) {
@@ -49,10 +45,6 @@ export class ApiService {
     return Object.assign(new Seance(), s);
   }
 
-  createMovie(movie: Movie) {
-    return this.post<Seance[]>('/movies/create', movie);
-  }
-
   getUsers(): Observable<User[]> {
     return this.get<User[]>('/users');
   }
@@ -74,30 +66,5 @@ export class ApiService {
 
   createAccount(user: User) {
     return this.http.post(ApiService.API_URL + '/account/register', user);
-  }
-
-  private get<T>(url) {
-    return this.http.get<T>(ApiService.API_URL + url, this.getAuthHeaders());
-  }
-
-  private post<T>(url, body) {
-    return this.http.post<T>(ApiService.API_URL + url, body, this.getAuthHeaders());
-  }
-
-  private getAuthHeaders() {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    if (!user) {
-      return {};
-    }
-    return this.getUserAuthHeaders(user);
-  }
-
-  private getUserAuthHeaders(user: User) {
-    return {
-      headers: new HttpHeaders({
-        'Accept': 'application/json',
-        'Authorization': 'Basic ' + btoa(user.username + ':' + user.password)
-      })
-    };
   }
 }
