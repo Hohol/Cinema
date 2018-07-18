@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Seance} from '../../model/model.seance';
-import {ApiService} from '../../services/api.service';
 import {Position} from '../../model/model.position';
 import _ from 'lodash';
 import {MessageService} from '../../services/message.service';
+import {SeanceService} from '../../services/seance.service';
 
 @Component({
   selector: 'app-buy-tickets',
@@ -24,7 +24,12 @@ export class BuyTicketsComponent implements OnInit {
   selected: Position[] = [];
   price: number;
 
-  constructor(private route: ActivatedRoute, private api: ApiService, private router: Router, private messageService: MessageService) {
+  constructor(
+    private route: ActivatedRoute,
+    private seanceService: SeanceService,
+    private router: Router,
+    private messageService: MessageService
+  ) {
   }
 
   ngOnInit() {
@@ -33,7 +38,7 @@ export class BuyTicketsComponent implements OnInit {
 
   private getSeance() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.api.getSeance(id)
+    this.seanceService.getSeance(id)
       .subscribe(s => this.seance = s);
   }
 
@@ -47,7 +52,7 @@ export class BuyTicketsComponent implements OnInit {
     } else {
       _.remove(this.selected, pos);
     }
-    this.api.calculatePrice(this.seance, this.selected)
+    this.seanceService.calculatePrice(this.seance, this.selected)
       .subscribe(price => this.price = price); // todo race condition
   }
 
@@ -77,7 +82,7 @@ export class BuyTicketsComponent implements OnInit {
 
   buy() {
     // todo block UI until response?
-    this.api.buyTickets(this.seance, this.selected)
+    this.seanceService.buyTickets(this.seance, this.selected)
       .subscribe(r => {
         this.messageService.setSuccessMessage('Билеты куплены');
         this.router.navigate(['/']);
