@@ -56,7 +56,7 @@ class SeanceController {
         for (Position pos : selected) {
             double price = calculateFixedPrice(seance, principal);
             if (vip.contains(pos)) {
-                price *= seance.getHall().getVipFactor();
+                price *= (1 + seance.getHall().getVipFactor());
             }
             sumPrice += Math.round(price);
         }

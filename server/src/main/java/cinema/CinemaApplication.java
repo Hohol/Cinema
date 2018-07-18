@@ -34,7 +34,7 @@ public class CinemaApplication {
             Movie movie3 = movieRepo.save(new Movie("Матрица", 105, 350));
 
             Hall hall1 = hallRepo.save(new Hall(
-                    "hall1", 1.5,
+                    "hall1", 0.5,
                     5, 10,
                     ImmutableList.of(
                             new Position(3, 3),
@@ -43,7 +43,7 @@ public class CinemaApplication {
             ));
 
             Hall hall2 = hallRepo.save(new Hall(
-                    "hall2", 1.2,
+                    "hall2", 0.2,
                     6, 15,
                     ImmutableList.of(
                             new Position(3, 3),
