@@ -10,10 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.*;
 
 @RestController
 class SeanceController {
@@ -23,6 +21,8 @@ class SeanceController {
     private UserRepository userRepository;
     @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
+    private PriceCalculator priceCalculator;
 
     @GetMapping("/seances")
     public Collection<SeanceForApi> seances(
@@ -36,43 +36,41 @@ class SeanceController {
             seances = seanceRepository.findAll();
         }
         return seances.stream()
-                .map(s -> seanceForApi(s, principal))
+                .map(s -> seanceForApi(s, getUser(principal)))
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/seance/{id}")
     public SeanceForApi seance(Principal principal, @PathVariable("id") long id) {
         Seance seance = seanceRepository.getOne(id);
-        return seanceForApi(seance, principal);
+        return seanceForApi(seance, getUser(principal));
     }
 
     @PostMapping("/seance/calculate-price/{id}")
+    @Transactional
     public int getPrice(Principal principal, @PathVariable("id") long seanceId, @RequestBody List<Position> selected) {
         Seance seance = seanceRepository.getOne(seanceId);
         Set<Position> occupied = new HashSet<>(getOccupiedPositions(seance));
         Verify.verify(Collections.disjoint(selected, occupied), "Trying to buy occupied position");
-        Set<Position> vip = new HashSet<>(seance.getHall().vipPositions);
-        int sumPrice = 0;
-        for (Position pos : selected) {
-            double price = calculateFixedPrice(seance, principal);
-            if (vip.contains(pos)) {
-                price *= (1 + seance.getHall().getVipFactor());
-            }
-            sumPrice += Math.round(price);
-        }
-        return sumPrice;
+        User user = getUser(principal);
+        int boughtTicketsCnt = getBoughtTicketsCnt(user);
+        List<Integer> prices = priceCalculator.calculateSelectedPositionsPrice(seance, user, boughtTicketsCnt, selected);
+        return prices.stream().mapToInt(p -> p).sum();
     }
 
     @PostMapping("/seance/buy/{id}")
     @Transactional
     public Map<String, String> buy(Principal principal, @PathVariable("id") long seanceId, @RequestBody List<Position> selected) {
-        User user = principal == null ? null : userRepository.findOneByUsername(principal.getName());
+        User user = getUser(principal);
         Seance seance = seanceRepository.getOne(seanceId);
         Set<Position> occupied = new HashSet<>(getOccupiedPositions(seance));
         Verify.verify(Collections.disjoint(selected, occupied), "Trying to buy occupied position");
-        List<Ticket> tickets = selected.stream()
-                .map(pos -> new Ticket(seance, user, pos, 0))
+
+        List<Integer> prices = priceCalculator.calculateFinalPrice(seance, user, getBoughtTicketsCnt(user), selected);
+        List<Ticket> tickets = IntStream.range(0, selected.size())
+                .mapToObj(i -> new Ticket(seance, user, selected.get(i), prices.get(i)))
                 .collect(Collectors.toList());
+
         ticketRepository.saveAll(tickets);
         return ImmutableMap.of("response", "tickets bought successfully");
     }
@@ -85,8 +83,9 @@ class SeanceController {
         return new SeanceStats(seance, tickets);
     }
 
-    private SeanceForApi seanceForApi(Seance seance, Principal principal) {
-        return new SeanceForApi(seance, calculateFixedPrice(seance, principal), getOccupiedPositions(seance));
+    private SeanceForApi seanceForApi(Seance seance, User user) {
+        int price = priceCalculator.calculateFixedPrice(seance, user);
+        return new SeanceForApi(seance, price, getOccupiedPositions(seance));
     }
 
     private List<Position> getOccupiedPositions(Seance seance) {
@@ -96,23 +95,14 @@ class SeanceController {
                 .collect(Collectors.toList());
     }
 
-    private int calculateFixedPrice(Seance seance, Principal principal) {
-        return (int) Math.round(seance.getMovie().getBaseTicketPrice() * getDiscountFactor(principal));
+    private User getUser(Principal principal) {
+        return principal == null ? null : userRepository.findOneByUsername(principal.getName());
     }
 
-    private double getDiscountFactor(Principal principal) {
-        if (principal == null) {
-            return 1;
+    private int getBoughtTicketsCnt(User user) {
+        if (user == null) {
+            return 0;
         }
-        User user = userRepository.findOneByUsername(principal.getName());
-        double factor = 1;
-        LocalDate today = LocalDate.now();
-        if (today.getDayOfYear() == user.getBirthday().getDayOfYear()) {
-            factor -= 0.5;
-        }
-        if (ChronoUnit.YEARS.between(user.getBirthday(), today) < 14) {
-            factor -= 0.25;
-        }
-        return factor;
+        return ticketRepository.countByUserId(user.getId());
     }
 }

@@ -9,5 +9,6 @@ import java.util.List;
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findAllBySeanceId(long seanceId);
     List<Ticket> findAllByUserId(long userId);
+    int countByUserId(long userId);
 }
 
