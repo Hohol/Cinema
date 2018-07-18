@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Movie} from '../../model/model.movie';
 import {User} from '../../model/model.user';
 import {MovieService} from '../../services/movie.service';
+import {MessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-movies',
@@ -14,7 +15,7 @@ export class MoviesComponent implements OnInit {
   newMovie = new Movie();
   currentUser: User;
 
-  constructor(private movieService: MovieService) {
+  constructor(private movieService: MovieService, private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -30,5 +31,18 @@ export class MoviesComponent implements OnInit {
   create() {
     this.movieService.createMovie(this.newMovie)
       .subscribe(r => this.reloadMovies());
+  }
+
+  delete(movieId: number) {
+    this.movieService.deleteMovie(movieId)
+      .subscribe(
+        r => {
+          this.reloadMovies();
+          this.messageService.setSuccessMessage('Фильм удален');
+        },
+        r => {
+          this.messageService.setErrorMessage('Не удалось удалить фильм: ' + r.error.errorMessage);
+        }
+      );
   }
 }

@@ -6,6 +6,9 @@
     <td>
       <a routerLink="/seances" [queryParams]="{ movieId: movie.id }">Сеансы</a>
     </td>
+    <td *ngIf="currentUser | isAdmin">
+      <button (click)="delete(movie.id)">Удалить</button>
+    </td>
   </tr>
   </tbody>
 </table>

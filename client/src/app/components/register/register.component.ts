@@ -24,7 +24,6 @@ export class RegisterComponent {
         this.api.logIn(this.user)
           .subscribe(response2 => this.router.navigate(['/']));
       }, err => {
-        console.log(err);
         this.errorMessage = 'username already exist';
       }
     );

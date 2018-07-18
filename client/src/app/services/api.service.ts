@@ -58,7 +58,6 @@ export class ApiService extends BaseApiService {
       .pipe(map(response => {
         const responseUser = response['principal'];
         if (responseUser) {
-          console.log(responseUser);
           localStorage.setItem('currentUser', JSON.stringify(responseUser));
         }
       }));

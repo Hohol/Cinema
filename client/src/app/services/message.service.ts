@@ -5,12 +5,19 @@ import {Injectable} from '@angular/core';
 })
 export class MessageService {
   message: string;
+  alertType: string;
 
   constructor() {
   }
 
-  setMessage(message: string) {
+  setSuccessMessage(message: string) {
     this.message = message;
+    this.alertType = 'alert-success';
+  }
+
+  setErrorMessage(message: string) {
+    this.message = message;
+    this.alertType = 'alert-danger';
   }
 
   clear() {

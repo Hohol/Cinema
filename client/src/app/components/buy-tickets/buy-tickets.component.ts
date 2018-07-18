@@ -79,8 +79,7 @@ export class BuyTicketsComponent implements OnInit {
     // todo block UI until response?
     this.api.buyTickets(this.seance, this.selected)
       .subscribe(r => {
-        console.log(r);
-        this.messageService.setMessage('Билеты куплены');
+        this.messageService.setSuccessMessage('Билеты куплены');
         this.router.navigate(['/']);
       });
   }
