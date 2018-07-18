@@ -7,7 +7,7 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/seances">Сеансы</a>
       </li>
-      <li class="nav-item" *ngIf="currentUser && currentUser.role === 'ADMIN'">
+      <li class="nav-item" *ngIf="currentUser | isAdmin">
         <a class="nav-link" routerLink="/users">Пользователи</a>
       </li>
     </ul>

@@ -10,7 +10,7 @@
   </tbody>
 </table>
 
-<div *ngIf="currentUser && currentUser.role === 'ADMIN'">
+<div *ngIf="currentUser | isAdmin">
   <form (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
     <div class="row">
 

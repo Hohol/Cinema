@@ -5,7 +5,7 @@
     <td>{{seance.formattedStartTime()}}</td>
     <td>{{seance.price}} руб.</td>
     <td><a routerLink="/seances/buy/{{seance.id}}">Купить билеты</a></td>
-    <td *ngIf="currentUser && currentUser.role === 'ADMIN'">
+    <td *ngIf="currentUser | isAdmin">
       <a routerLink="/seances/{{seance.id}}">Статистика сеанса</a>
     </td>
   </tr>

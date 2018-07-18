@@ -14,8 +14,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {BuyTicketsComponent} from './components/buy-tickets/buy-tickets.component';
 import {UsersComponent} from './components/users/users.component';
-import { UserStatsComponent } from './components/user-stats/user-stats.component';
-import { SeanceStatsComponent } from './components/seance-stats/seance-stats.component';
+import {UserStatsComponent} from './components/user-stats/user-stats.component';
+import {SeanceStatsComponent} from './components/seance-stats/seance-stats.component';
+import {IsAdminPipe} from './is-admin.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SeanceStatsComponent } from './components/seance-stats/seance-stats.com
     UsersComponent,
     UserStatsComponent,
     SeanceStatsComponent,
+    IsAdminPipe,
   ],
   imports: [
     BrowserModule,
