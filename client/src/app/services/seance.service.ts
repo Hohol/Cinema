@@ -42,4 +42,8 @@ export class SeanceService extends BaseApiService {
   toSeance(s: Seance) {
     return Object.assign(new Seance(), s);
   }
+
+  deleteSeance(id: number): Observable<Object> {
+    return this.post(`/seances/delete/${id}`, {});
+  }
 }

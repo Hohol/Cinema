@@ -8,6 +8,9 @@
     <td *ngIf="currentUser | isAdmin">
       <a routerLink="/seances/{{seance.id}}">Статистика сеанса</a>
     </td>
+    <td *ngIf="currentUser | isAdmin">
+      <button (click)="delete(seance.id)">Удалить</button>
+    </td>
   </tr>
   </tbody>
 </table>

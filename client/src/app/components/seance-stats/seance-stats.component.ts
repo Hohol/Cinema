@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../../services/api.service';
 import {ActivatedRoute} from '@angular/router';
 import {SeanceStats} from '../../model/model.seance-stats';
+import {SeanceService} from '../../services/seance.service';
 
 @Component({
   selector: 'app-seance-stats',
@@ -12,12 +12,12 @@ export class SeanceStatsComponent implements OnInit {
 
   seanceStats: SeanceStats;
 
-  constructor(private api: ApiService, private route: ActivatedRoute) {
+  constructor(private seanceService: SeanceService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     const seanceId = +this.route.snapshot.paramMap.get('id');
-    this.api.getSeanceStats(seanceId)
+    this.seanceService.getSeanceStats(seanceId)
       .subscribe(seanceStats => this.seanceStats = seanceStats);
   }
 }

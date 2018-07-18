@@ -46,6 +46,12 @@ class SeanceController {
         return seanceForApi(seance, getUser(principal));
     }
 
+    @PostMapping("/seances/delete/{id}")
+    public Object create(@PathVariable("id") long id) {
+        seanceRepository.deleteById(id);
+        return ImmutableMap.of("response", "Seance deleted successfully");
+    }
+
     @PostMapping("/seance/calculate-price/{id}")
     @Transactional
     public int getPrice(Principal principal, @PathVariable("id") long seanceId, @RequestBody List<Position> selected) {

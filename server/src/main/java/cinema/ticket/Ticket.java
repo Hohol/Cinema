@@ -4,9 +4,11 @@ import cinema.auth.User;
 import cinema.hall.Position;
 import cinema.seance.Seance;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.*;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -16,6 +18,7 @@ public class Ticket {
     private long id;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Seance seance;
 
     @ManyToOne

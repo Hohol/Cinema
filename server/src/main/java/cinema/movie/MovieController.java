@@ -22,7 +22,6 @@ class MovieController {
     @PostMapping("/movies/create")
     public Map<String, String> create(@RequestBody Movie movie) {
         repository.save(movie);
-        System.out.println(movie);
         return ImmutableMap.of("response", "Movie " + movie.getTitle() + " saved successfully");
     }
 
