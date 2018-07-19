@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Название</th>
+    <th>Число рядов</th>
+    <th>Число мест в ряду</th>
+    <th>VIP коэффициент</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let hall of halls">
+    <td>{{hall.name}}</td>
+    <td>{{hall.rowCnt}}</td>
+    <td>{{hall.colCnt}}</td>
+    <td>{{hall.vipFactor}}</td>
+  </tr>
+  </tbody>
+</table>

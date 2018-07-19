@@ -10,6 +10,7 @@ import {UserStatsComponent} from './components/user/user-stats/user-stats.compon
 import {SeanceStatsComponent} from './components/seance/seance-stats/seance-stats.component';
 import {CreateMovieComponent} from './components/movie/create-movie/create-movie.component';
 import {EditMovieComponent} from './components/movie/create-movie/edit-movie.component';
+import {HallsComponent} from './components/hall/halls/halls.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/movies', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'seances', component: SeancesComponent},
   {path: 'seances/buy/:id', component: BuyTicketsComponent},
   {path: 'seances/:id', component: SeanceStatsComponent},
+  {path: 'halls', component: HallsComponent},
   {path: 'users', component: UsersComponent},
   {path: 'user/:id', component: UserStatsComponent},
   {path: 'login', component: LoginComponent},

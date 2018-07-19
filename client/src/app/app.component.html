@@ -7,9 +7,14 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/seances">Сеансы</a>
       </li>
-      <li class="nav-item" *ngIf="currentUser | isAdmin">
-        <a class="nav-link" routerLink="/users">Пользователи</a>
-      </li>
+      <ng-container *ngIf="currentUser | isAdmin">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/users">Пользователи</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/halls">Залы</a>
+        </li>
+      </ng-container>
     </ul>
   </div>
   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">

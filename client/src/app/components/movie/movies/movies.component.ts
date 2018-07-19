@@ -12,7 +12,6 @@ import {MessageService} from '../../../services/message.service';
 export class MoviesComponent implements OnInit {
 
   movies: Movie[];
-  movie = new Movie();
   currentUser: User;
 
   constructor(private movieService: MovieService, private messageService: MessageService) {

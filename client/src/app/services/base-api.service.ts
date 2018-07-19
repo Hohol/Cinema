@@ -1,5 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../model/model.user';
+import {Observable} from 'rxjs';
 
 export class BaseApiService {
 
@@ -8,7 +9,7 @@ export class BaseApiService {
   constructor(protected http: HttpClient) {
   }
 
-  protected get<T>(url) {
+  protected get<T>(url): Observable<T> {
     return this.http.get<T>(BaseApiService.API_URL + url, this.getAuthHeaders());
   }
 
