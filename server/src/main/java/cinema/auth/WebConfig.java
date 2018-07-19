@@ -60,7 +60,9 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                         "/movies/delete/{id}",
                         "/seances/delete/{id}",
                         "/movies/edit",
-                        "/halls"
+                        "/halls",
+                        "/halls/create",
+                        "/halls/{id}"
                 ).hasAuthority("ADMIN")
                 .anyRequest().fullyAuthenticated()
                 .and()

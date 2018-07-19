@@ -21,6 +21,7 @@ import {CreateMovieComponent} from './components/movie/create-movie/create-movie
 import {EditMovieComponent} from './components/movie/create-movie/edit-movie.component';
 import { HallsComponent } from './components/hall/halls/halls.component';
 import { CreateHallComponent } from './components/hall/create-hall/create-hall.component';
+import {EditHallComponent} from './components/hall/create-hall/edit-hall.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CreateHallComponent } from './components/hall/create-hall/create-hall.c
     EditMovieComponent,
     HallsComponent,
     CreateHallComponent,
+    EditHallComponent,
   ],
   imports: [
     BrowserModule,

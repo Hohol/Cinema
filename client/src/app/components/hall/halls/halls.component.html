@@ -18,6 +18,7 @@
     <td>{{hall.colCnt}}</td>
     <td>{{hall.vipFactor}}</td>
     <td><button (click)="delete(hall.id)">Удалить</button></td>
+    <td><a routerLink="/halls/edit/{{hall.id}}">Редактировать</a> </td>
   </tr>
   </tbody>
 </table>

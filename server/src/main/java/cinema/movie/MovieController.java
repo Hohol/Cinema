@@ -20,7 +20,7 @@ class MovieController {
     }
 
     @GetMapping("/movies/{id}")
-    public Movie movies(@PathVariable("id") long id) {
+    public Movie movie(@PathVariable("id") long id) {
         return repository.getOne(id);
     }
 

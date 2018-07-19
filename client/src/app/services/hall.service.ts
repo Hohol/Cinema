@@ -24,4 +24,12 @@ export class HallService extends BaseApiService {
   createHall(hall: Hall) {
     return this.post('/halls/create', hall);
   }
+
+  editHall(hall: Hall): Observable<any> {
+    return this.post(`/halls/edit`, hall);
+  }
+
+  getHall(id: number): Observable<Hall> {
+    return this.get<Hall>(`/halls/${id}`);
+  }
 }
