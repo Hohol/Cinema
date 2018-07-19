@@ -16,6 +16,23 @@ export class HallsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.reload();
+  }
+
+  delete(id: number) {
+    this.hallService.deleteHall(id)
+      .subscribe(
+        r => {
+          this.reload();
+          this.messageService.setSuccessMessage('Зал удален');
+        },
+        r => {
+          this.messageService.setErrorMessage('Не удалось удалить Зал: ' + r.error.errorMessage);
+        }
+      );
+  }
+
+  private reload() {
     this.hallService.getHalls()
       .subscribe(halls => this.halls = halls);
   }

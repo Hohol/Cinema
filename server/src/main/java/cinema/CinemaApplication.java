@@ -53,6 +53,12 @@ public class CinemaApplication {
                     )
             ));
 
+            Hall hall3 = hallRepo.save(new Hall(
+                    "hall3", 0.4,
+                    6, 15,
+                    ImmutableList.of()
+            ));
+
             Seance seance1 = seanceRepo.save(new Seance(movie1, hall1, Instant.now().plus(3, ChronoUnit.DAYS)));
             Seance seance2 = seanceRepo.save(new Seance(movie2, hall2, Instant.now().plus(3, ChronoUnit.HOURS)));
 

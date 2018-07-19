@@ -16,4 +16,8 @@ export class HallService extends BaseApiService {
   getHalls(): Observable<Hall[]> {
     return this.get<Hall[]>('/halls');
   }
+
+  deleteHall(id: number) {
+    return this.post(`/halls/delete/${id}`, {});
+  }
 }
