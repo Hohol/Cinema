@@ -17,6 +17,7 @@ import {UsersComponent} from './components/users/users.component';
 import {UserStatsComponent} from './components/user-stats/user-stats.component';
 import {SeanceStatsComponent} from './components/seance-stats/seance-stats.component';
 import {IsAdminPipe} from './is-admin.pipe';
+import {CreateMovieComponent} from './components/create-movie/create-movie.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {IsAdminPipe} from './is-admin.pipe';
     UserStatsComponent,
     SeanceStatsComponent,
     IsAdminPipe,
+    CreateMovieComponent,
   ],
   imports: [
     BrowserModule,

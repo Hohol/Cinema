@@ -12,7 +12,7 @@ import {MessageService} from '../../services/message.service';
 export class MoviesComponent implements OnInit {
 
   movies: Movie[];
-  newMovie = new Movie();
+  movie = new Movie();
   currentUser: User;
 
   constructor(private movieService: MovieService, private messageService: MessageService) {
@@ -26,11 +26,6 @@ export class MoviesComponent implements OnInit {
   private reloadMovies() {
     this.movieService.getMovies()
       .subscribe(movies => this.movies = movies);
-  }
-
-  create() {
-    this.movieService.createMovie(this.newMovie)
-      .subscribe(r => this.reloadMovies());
   }
 
   delete(movieId: number) {
