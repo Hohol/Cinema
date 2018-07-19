@@ -11,6 +11,7 @@ import {SeanceStatsComponent} from './components/seance/seance-stats/seance-stat
 import {CreateMovieComponent} from './components/movie/create-movie/create-movie.component';
 import {EditMovieComponent} from './components/movie/create-movie/edit-movie.component';
 import {HallsComponent} from './components/hall/halls/halls.component';
+import {CreateHallComponent} from './components/hall/create-hall/create-hall.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/movies', pathMatch: 'full'},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'seances/buy/:id', component: BuyTicketsComponent},
   {path: 'seances/:id', component: SeanceStatsComponent},
   {path: 'halls', component: HallsComponent},
+  {path: 'halls/create', component: CreateHallComponent},
   {path: 'users', component: UsersComponent},
   {path: 'user/:id', component: UserStatsComponent},
   {path: 'login', component: LoginComponent},

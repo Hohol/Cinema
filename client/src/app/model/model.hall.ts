@@ -1,3 +1,5 @@
+import {Position} from './model.position';
+
 export class Hall {
   id: number;
   name: string;

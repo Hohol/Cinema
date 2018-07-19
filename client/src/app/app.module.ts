@@ -20,6 +20,7 @@ import {IsAdminPipe} from './is-admin.pipe';
 import {CreateMovieComponent} from './components/movie/create-movie/create-movie.component';
 import {EditMovieComponent} from './components/movie/create-movie/edit-movie.component';
 import { HallsComponent } from './components/hall/halls/halls.component';
+import { CreateHallComponent } from './components/hall/create-hall/create-hall.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { HallsComponent } from './components/hall/halls/halls.component';
     CreateMovieComponent,
     EditMovieComponent,
     HallsComponent,
+    CreateHallComponent,
   ],
   imports: [
     BrowserModule,

@@ -20,4 +20,8 @@ export class HallService extends BaseApiService {
   deleteHall(id: number) {
     return this.post(`/halls/delete/${id}`, {});
   }
+
+  createHall(hall: Hall) {
+    return this.post('/halls/create', hall);
+  }
 }

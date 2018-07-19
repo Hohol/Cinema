@@ -18,7 +18,7 @@ export class BuyTicketsComponent implements OnInit {
   private vipColor = 'gold';
   private defaultColor = 'white';
 
-  _ = _; // о_О
+  _ = _; // make lodash available in template
 
   seance: Seance;
   selected: Position[] = [];

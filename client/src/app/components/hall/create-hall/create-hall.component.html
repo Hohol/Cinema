@@ -1,0 +1,70 @@
+<h3>{{componentTitle}}</h3>
+<form (ngSubmit)="f.form.valid && action()" #f="ngForm" novalidate>
+  <div class="row">
+
+    <div class="col-md-3 mb-3">
+      <label for="name">Название</label>
+      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="hall.name" #name="ngModel"
+             required>
+      <div *ngIf="f.submitted && !name.valid" class="help-block">
+        Введите название
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <label for="vipFactor">VIP-коэффициент</label>
+      <input type="number" class="form-control" id="vipFactor" name="vipFactor" [(ngModel)]="hall.vipFactor"
+             #vipFactor="ngModel" required>
+      <div *ngIf="f.submitted && !vipFactor.valid" class="help-block">
+        Введите VIP-коэффициент
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <label for="rowCnt">Количество рядов</label>
+      <input type="number" class="form-control" id="rowCnt" name="rowCnt" [(ngModel)]="hall.rowCnt"
+             #rowCnt="ngModel" required>
+      <div *ngIf="f.submitted && !rowCnt.valid" class="help-block">
+        Введите количество рядов
+      </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <label for="colCnt">Количество мест в ряду</label>
+      <input type="number" class="form-control" id="colCnt" name="colCnt" [(ngModel)]="hall.colCnt"
+             #colCnt="ngModel" required>
+      <div *ngIf="f.submitted && !colCnt.valid" class="help-block">
+        Введите количество мест в ряду
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="hall.rowCnt && hall.colCnt">
+    <div>
+      Выделите VIP места
+    </div>
+    <div>
+      Экран
+    </div>
+    <table align="center">
+      <tbody>
+      <tr *ngFor="let row of _.range(1, hall.rowCnt+1)">
+        <td>
+          {{row}} ряд
+        </td>
+        <td *ngFor="let col of _.range(1, hall.colCnt+1)">
+          <button type="button" (click)="click(row, col)" [ngStyle]="{'background-color': getColor(row,col)}">
+            {{col}}
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <p></p>
+
+
+  <button type="submit">{{actionTitle}}</button>
+  <button (click)="cancel()">Отмена</button>
+</form>

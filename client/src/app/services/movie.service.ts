@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Movie} from '../model/model.movie';
-import {Seance} from '../model/model.seance';
 import {HttpClient} from '@angular/common/http';
 import {BaseApiService} from './base-api.service';
 
@@ -23,7 +22,7 @@ export class MovieService extends BaseApiService {
   }
 
   createMovie(movie: Movie) {
-    return this.post<Seance[]>('/movies/create', movie);
+    return this.post('/movies/create', movie);
   }
 
   deleteMovie(id: number): Observable<Object> {
