@@ -19,10 +19,21 @@ class MovieController {
         return repository.findAll();
     }
 
+    @GetMapping("/movies/{id}")
+    public Movie movies(@PathVariable("id") long id) {
+        return repository.getOne(id);
+    }
+
     @PostMapping("/movies/create")
     public Map<String, String> create(@RequestBody Movie movie) {
         repository.save(movie);
         return ImmutableMap.of("response", "Movie " + movie.getTitle() + " saved successfully");
+    }
+
+    @PostMapping("/movies/edit")
+    public Map<String, String> edit(@RequestBody Movie movie) {
+        repository.save(movie);
+        return ImmutableMap.of("response", "Movie " + movie.getTitle() + " edited successfully");
     }
 
     @PostMapping("/movies/delete/{id}")

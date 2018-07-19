@@ -18,11 +18,19 @@ export class MovieService extends BaseApiService {
     return this.get<Movie[]>('/movies');
   }
 
+  getMovie(id: number) {
+    return this.get<Movie>(`/movies/${id}`);
+  }
+
   createMovie(movie: Movie) {
     return this.post<Seance[]>('/movies/create', movie);
   }
 
   deleteMovie(id: number): Observable<Object> {
     return this.post(`/movies/delete/${id}`, {});
+  }
+
+  editMovie(movie: Movie) {
+    return this.post(`/movies/edit/`, movie);
   }
 }

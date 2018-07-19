@@ -1,8 +1,11 @@
 package cinema.movie;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

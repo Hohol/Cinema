@@ -45,6 +45,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                         "/account/login",
                         "/logout",
                         "/movies",
+                        "/movies/{id}",
                         "/users",
                         "/seances",
                         "/seance/{id}",
@@ -57,7 +58,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                         "/user/{id}",
                         "/seance-stats/{id}",
                         "/movies/delete/{id}",
-                        "/seances/delete/{id}"
+                        "/seances/delete/{id}",
+                        "/movies/edit"
                 ).hasAuthority("ADMIN")
                 .anyRequest().fullyAuthenticated()
                 .and()

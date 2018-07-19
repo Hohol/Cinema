@@ -1,4 +1,4 @@
-<h3>Добавление нового фильма</h3>
+<h3>{{componentTitle}}</h3>
 <form (ngSubmit)="f.form.valid && action()" #f="ngForm" novalidate>
   <div class="row">
 
@@ -30,6 +30,6 @@
     </div>
 
   </div>
-  <button type="submit">Добавить</button>
-  <button (click)="cancel">Отмена</button>
+  <button type="submit">{{actionTitle}}</button>
+  <button (click)="cancel()">Отмена</button>
 </form>

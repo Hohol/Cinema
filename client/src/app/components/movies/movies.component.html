@@ -10,9 +10,14 @@
     <td>
       <a routerLink="/seances" [queryParams]="{ movieId: movie.id }">Сеансы</a>
     </td>
-    <td *ngIf="currentUser | isAdmin">
-      <button (click)="delete(movie.id)">Удалить</button>
-    </td>
+    <ng-container *ngIf="currentUser | isAdmin">
+      <td>
+        <button (click)="delete(movie.id)">Удалить</button>
+      </td>
+      <td>
+        <a routerLink="/movies/edit/{{movie.id}}">Редактировать</a>
+      </td>
+    </ng-container>
   </tr>
   </tbody>
 </table>
