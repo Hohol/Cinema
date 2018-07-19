@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Seance} from '../../model/model.seance';
-import {Position} from '../../model/model.position';
 import _ from 'lodash';
-import {MessageService} from '../../services/message.service';
-import {SeanceService} from '../../services/seance.service';
+import {Seance} from '../../../model/model.seance';
+import {SeanceService} from '../../../services/seance.service';
+import {MessageService} from '../../../services/message.service';
+import {Position} from '../../../model/model.position';
 
 @Component({
   selector: 'app-buy-tickets',

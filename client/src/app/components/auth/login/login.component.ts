@@ -1,7 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {User} from '../../model/model.user';
 import {Router} from '@angular/router';
-import {ApiService} from '../../services/api.service';
+import {User} from '../../../model/model.user';
+import {ApiService} from '../../../services/api.service';
 
 
 @Component({

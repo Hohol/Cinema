@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {SeanceStats} from '../../model/model.seance-stats';
-import {SeanceService} from '../../services/seance.service';
+import {SeanceStats} from '../../../model/model.seance-stats';
+import {SeanceService} from '../../../services/seance.service';
 
 @Component({
   selector: 'app-seance-stats',

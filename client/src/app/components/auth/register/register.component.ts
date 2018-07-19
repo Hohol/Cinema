@@ -1,8 +1,8 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {User} from '../../model/model.user';
+import {User} from '../../../model/model.user';
 import {Router} from '@angular/router';
 import {Moment} from 'moment';
-import {ApiService} from '../../services/api.service';
+import {ApiService} from '../../../services/api.service';
 
 @Component({
   selector: 'app-register',

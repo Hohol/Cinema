@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Movie} from '../../model/model.movie';
-import {User} from '../../model/model.user';
-import {MovieService} from '../../services/movie.service';
-import {MessageService} from '../../services/message.service';
+import {Movie} from '../../../model/model.movie';
+import {User} from '../../../model/model.user';
+import {MovieService} from '../../../services/movie.service';
+import {MessageService} from '../../../services/message.service';
 
 @Component({
   selector: 'app-movies',

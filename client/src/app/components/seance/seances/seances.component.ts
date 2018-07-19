@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Seance} from '../../model/model.seance';
 import {ActivatedRoute} from '@angular/router';
-import {User} from '../../model/model.user';
-import {SeanceService} from '../../services/seance.service';
-import {MessageService} from '../../services/message.service';
+import {Seance} from '../../../model/model.seance';
+import {User} from '../../../model/model.user';
+import {SeanceService} from '../../../services/seance.service';
+import {MessageService} from '../../../services/message.service';
 
 @Component({
   selector: 'app-seances',

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {MessageService} from '../../services/message.service';
-import {MovieService} from '../../services/movie.service';
-import {Movie} from '../../model/model.movie';
+import {MessageService} from '../../../services/message.service';
+import {MovieService} from '../../../services/movie.service';
+import {Movie} from '../../../model/model.movie';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

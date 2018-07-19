@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../../services/api.service';
-import {UserStats} from '../../model/model.user-stats';
 import {ActivatedRoute} from '@angular/router';
+import {UserStats} from '../../../model/model.user-stats';
+import {ApiService} from '../../../services/api.service';
 
 @Component({
   selector: 'app-user-tickets',
