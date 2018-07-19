@@ -1,0 +1,37 @@
+<h3>{{componentTitle}}</h3>
+<form (ngSubmit)="f.form.valid && action()" #f="ngForm" novalidate>
+  <div class="row">
+
+    <div class="col-md-4 mb-3">
+      <label for="movieId">id фильма</label>
+      <input type="number" class="form-control" id="movieId" name="movieId" [(ngModel)]="movieId" #mId="ngModel"
+             required>
+      <div *ngIf="f.submitted && !mId.valid" class="help-block">
+        Введите id фильма
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="startTime">Время начала</label>
+      <input id="startTime" name="startTime" class="form-control" #time="ngModel" required
+             [(ngModel)]="startTime"
+             [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+      <owl-date-time [firstDayOfWeek]=1 #dt></owl-date-time>
+      <div *ngIf="f.submitted && !time.valid" class="help-block">
+        Введите время начала
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="hallId">id зала</label>
+      <input type="number" class="form-control" id="hallId" name="hallId" [(ngModel)]="hallId" #hId="ngModel"
+             required>
+      <div *ngIf="f.submitted && !hId.valid" class="help-block">
+        Введите id зала
+      </div>
+    </div>
+
+  </div>
+  <button type="submit">{{actionTitle}}</button>
+  <button (click)="cancel()">Отмена</button>
+</form>

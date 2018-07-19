@@ -1,3 +1,7 @@
+<div *ngIf="currentUser | isAdmin">
+  <a routerLink="/seances/create">Добавить новый сеанс</a>
+</div>
+<p></p>
 <table class="table">
   <tbody>
   <tr *ngFor="let seance of seances">

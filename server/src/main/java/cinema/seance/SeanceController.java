@@ -1,7 +1,8 @@
 package cinema.seance;
 
 import cinema.auth.*;
-import cinema.hall.Position;
+import cinema.hall.*;
+import cinema.movie.*;
 import cinema.ticket.*;
 import com.google.common.base.Verify;
 import com.google.common.collect.ImmutableMap;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.*;
 import java.util.*;
 import java.util.stream.*;
 
@@ -23,6 +25,11 @@ class SeanceController {
     private TicketRepository ticketRepository;
     @Autowired
     private PriceCalculator priceCalculator;
+
+    @Autowired
+    private MovieRepository movieRepository;
+    @Autowired
+    private HallRepository hallRepository;
 
     @GetMapping("/seances")
     public Collection<SeanceForApi> seances(
@@ -46,8 +53,33 @@ class SeanceController {
         return seanceForApi(seance, getUser(principal));
     }
 
+    private static class NewSeance {
+        public long movieId;
+        public String startTime;
+        public long hallId;
+
+        @Override
+        public String toString() {
+            return "NewSeance{" +
+                    "movieId=" + movieId +
+                    ", startTime='" + startTime + '\'' +
+                    ", hallId=" + hallId +
+                    '}';
+        }
+    }
+
+    @PostMapping("/seances/create")
+    @Transactional
+    public void seance(@RequestBody NewSeance newSeance) {
+        Movie movie = movieRepository.getOne(newSeance.movieId);
+        Hall hall = hallRepository.getOne(newSeance.hallId);
+        Instant startTime = Instant.parse(newSeance.startTime);
+        Seance seance = new Seance(movie, hall, startTime);
+        seanceRepository.save(seance);
+    }
+
     @PostMapping("/seances/delete/{id}")
-    public Object create(@PathVariable("id") long id) {
+    public Object delete(@PathVariable("id") long id) {
         seanceRepository.deleteById(id);
         return ImmutableMap.of("response", "Seance deleted successfully");
     }

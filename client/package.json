@@ -26,6 +26,8 @@
     "core-js": "^2.5.4",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
+    "ng-pick-datetime": "^6.0.10",
+    "ng-pick-datetime-moment": "^1.0.6",
     "npm": "^6.1.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"

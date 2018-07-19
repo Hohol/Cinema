@@ -19,9 +19,12 @@ import {SeanceStatsComponent} from './components/seance/seance-stats/seance-stat
 import {IsAdminPipe} from './is-admin.pipe';
 import {CreateMovieComponent} from './components/movie/create-movie/create-movie.component';
 import {EditMovieComponent} from './components/movie/create-movie/edit-movie.component';
-import { HallsComponent } from './components/hall/halls/halls.component';
-import { CreateHallComponent } from './components/hall/create-hall/create-hall.component';
+import {HallsComponent} from './components/hall/halls/halls.component';
+import {CreateHallComponent} from './components/hall/create-hall/create-hall.component';
 import {EditHallComponent} from './components/hall/create-hall/edit-hall.component';
+import {CreateSeanceComponent} from './components/seance/create-seance/create-seance.component';
+import {OwlDateTimeModule} from 'ng-pick-datetime';
+import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import {EditHallComponent} from './components/hall/create-hall/edit-hall.compone
     HallsComponent,
     CreateHallComponent,
     EditHallComponent,
+    CreateSeanceComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,9 @@ import {EditHallComponent} from './components/hall/create-hall/edit-hall.compone
     MatDatepickerModule,
     MatInputModule,
     MatMomentDateModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    OwlDateTimeModule,
+    OwlMomentDateTimeModule ,
   ],
   providers: [],
   bootstrap: [AppComponent]

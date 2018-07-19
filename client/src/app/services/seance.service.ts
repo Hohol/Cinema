@@ -46,4 +46,8 @@ export class SeanceService extends BaseApiService {
   deleteSeance(id: number): Observable<Object> {
     return this.post(`/seances/delete/${id}`, {});
   }
+
+  createSeance(seance) {
+    return this.post('/seances/create', seance);
+  }
 }

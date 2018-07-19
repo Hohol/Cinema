@@ -59,6 +59,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                         "/seance-stats/{id}",
                         "/movies/delete/{id}",
                         "/seances/delete/{id}",
+                        "/seances/create",
                         "/movies/edit",
                         "/halls",
                         "/halls/create",
