@@ -61,6 +61,8 @@ public class CinemaApplication {
 
             Seance seance1 = seanceRepo.save(new Seance(movie1, hall1, Instant.now().plus(3, ChronoUnit.DAYS)));
             Seance seance2 = seanceRepo.save(new Seance(movie2, hall2, Instant.now().plus(3, ChronoUnit.HOURS)));
+            Seance seance3 = seanceRepo.save(new Seance(movie1, hall2, Instant.now().plus(6, ChronoUnit.DAYS)));
+            Seance seance4 = seanceRepo.save(new Seance(movie2, hall2, Instant.now().plus(3, ChronoUnit.DAYS)));
 
             User user = userRepo.save(new User(
                     "nikita",
