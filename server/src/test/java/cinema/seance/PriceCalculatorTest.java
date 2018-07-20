@@ -4,14 +4,12 @@ import cinema.auth.User;
 import cinema.hall.*;
 import cinema.movie.Movie;
 import com.google.common.collect.*;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.*;
 
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-@Test
 public class PriceCalculatorTest {
 
     LocalDateTime now = LocalDateTime.of(2018, 7, 18, 14, 0); // wednesday
@@ -20,54 +18,55 @@ public class PriceCalculatorTest {
     PriceCalculator priceCalculator = new PriceCalculator(Clock.fixed(now.toInstant(ZoneOffset.UTC), ZoneId.of("UTC")));
 
     @Test
-    void birthday() {
+    public void birthday() {
         int price = priceCalculator.calculateFixedPrice(
                 seance(today, 100),
                 user(today.minus(20, ChronoUnit.YEARS))
         );
-        Assert.assertEquals(price, 50);
+        int expected = 50;
+        Assert.assertEquals(expected, price);
     }
 
     @Test
-    void child() {
+    public void child() {
         int price = priceCalculator.calculateFixedPrice(
                 seance(today, 200),
                 user(today.minusYears(12).minusDays(3))
         );
-        Assert.assertEquals(price, 150);
+        Assert.assertEquals(150, price);
     }
 
     @Test
-    void childAndBirthday() {
+    public void childAndBirthday() {
         int price = priceCalculator.calculateFixedPrice(
                 seance(today, 100),
                 user(today.minusYears(12))
         );
         // discounts are applied additively
-        Assert.assertEquals(price, 25);
+        Assert.assertEquals(25, price);
     }
 
     @Test
-    void weekend() {
+    public void weekend() {
         int price = priceCalculator.calculateFixedPrice(
                 seance(sunday, 100),
                 null
         );
-        Assert.assertEquals(price, 130);
+        Assert.assertEquals(130, price);
     }
 
     @Test
-    void birthdayAndWeekend() {
+    public void birthdayAndWeekend() {
         int price = priceCalculator.calculateFixedPrice(
                 seance(sunday, 100),
                 user(today.minusYears(20))
         );
         // birthday discount is applied AFTER weekend factor
-        Assert.assertEquals(price, 65);
+        Assert.assertEquals(65, price);
     }
 
     @Test
-    void vip() {
+    public void vip() {
         List<Integer> prices = priceCalculator.calculateSelectedPositionsPrice(
                 seance(
                         today,
@@ -78,11 +77,11 @@ public class PriceCalculatorTest {
                 0,
                 ImmutableList.of(pos(1, 1), pos(1, 2))
         );
-        Assert.assertEquals(prices, ImmutableList.of(150, 100));
+        Assert.assertEquals(ImmutableList.of(150, 100), prices);
     }
 
     @Test
-    void vipAndWeekend() {
+    public void vipAndWeekend() {
         List<Integer> prices = priceCalculator.calculateSelectedPositionsPrice(
                 seance(
                         sunday,
@@ -94,11 +93,11 @@ public class PriceCalculatorTest {
                 ImmutableList.of(pos(1, 1), pos(1, 2))
         );
         // factors are applied additively
-        Assert.assertEquals(prices, ImmutableList.of(180, 130));
+        Assert.assertEquals(ImmutableList.of(180, 130), prices);
     }
 
     @Test
-    void vipAndBirthday() {
+    public void vipAndBirthday() {
         List<Integer> prices = priceCalculator.calculateSelectedPositionsPrice(
                 seance(
                         today,
@@ -110,11 +109,11 @@ public class PriceCalculatorTest {
                 ImmutableList.of(pos(1, 1))
         );
         // birthday discount is applied AFTER vip factor
-        Assert.assertEquals(prices, ImmutableList.of(75));
+        Assert.assertEquals(ImmutableList.of(75), prices);
     }
 
     @Test
-    void sixthTicketIsFree() {
+    public void sixthTicketIsFree() {
         List<Integer> prices = priceCalculator.calculateSelectedPositionsPrice(
                 seance(
                         today,
@@ -132,11 +131,12 @@ public class PriceCalculatorTest {
                         pos(1, 6)
                 )
         );
-        Assert.assertEquals(prices, ImmutableList.of(100, 100, 100, 100, 100, 0));
+        ImmutableList<Integer> expected = ImmutableList.of(100, 100, 100, 100, 100, 0);
+        Assert.assertEquals(expected, prices);
     }
 
     @Test
-    void every10thTicketIsFree() {
+    public void every10thTicketIsFree() {
         List<Integer> prices = priceCalculator.calculateSelectedPositionsPrice(
                 seance(
                         today,
@@ -151,7 +151,7 @@ public class PriceCalculatorTest {
                         pos(1, 3)
                 )
         );
-        Assert.assertEquals(prices, ImmutableList.of(100, 0, 100));
+        Assert.assertEquals(ImmutableList.of(100, 0, 100), prices);
     }
 
     private Seance seance(LocalDate date, int basePrice) {
