@@ -13,10 +13,24 @@ import java.util.*;
 class MovieController {
     @Autowired
     private MovieRepository repository;
+    @Autowired
+    private MovieService movieService;
 
     @GetMapping("/movies")
-    public Collection<Movie> movies() {
-        return repository.findAll();
+    public Collection<Movie> movies(@RequestParam(value = "filter") Filter filter) {
+        switch (filter) {
+            case ongoing:
+                return movieService.ongoingMovies();
+            case comingSoon:
+                return movieService.comingSoonMovies();
+            case all:
+                return repository.findAll();
+        }
+        throw new RuntimeException("unknown filter type");
+    }
+
+    enum Filter {
+        ongoing, comingSoon, all
     }
 
     @GetMapping("/movies/{id}")

@@ -13,8 +13,8 @@ export class MovieService extends BaseApiService {
     super(http);
   }
 
-  public getMovies(): Observable<Movie[]> {
-    return this.get<Movie[]>('/movies');
+  public getMovies(filter: string): Observable<Movie[]> {
+    return this.get<Movie[]>(`/movies?filter=${filter}`);
   }
 
   getMovie(id: number) {

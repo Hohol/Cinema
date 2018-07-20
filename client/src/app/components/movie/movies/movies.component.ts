@@ -3,6 +3,7 @@ import {Movie} from '../../../model/model.movie';
 import {User} from '../../../model/model.user';
 import {MovieService} from '../../../services/movie.service';
 import {MessageService} from '../../../services/message.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -13,17 +14,26 @@ export class MoviesComponent implements OnInit {
 
   movies: Movie[];
   currentUser: User;
+  filter: string;
 
-  constructor(private movieService: MovieService, private messageService: MessageService) {
+  constructor(
+    private movieService: MovieService,
+    private messageService: MessageService,
+    private route: ActivatedRoute
+  ) {
   }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.reloadMovies();
+    this.route.queryParams
+      .subscribe(params => {
+        this.filter = params['filter'] || 'ongoing';
+        this.reloadMovies();
+      });
   }
 
   private reloadMovies() {
-    this.movieService.getMovies()
+    this.movieService.getMovies(this.filter)
       .subscribe(movies => this.movies = movies);
   }
 
@@ -38,5 +48,9 @@ export class MoviesComponent implements OnInit {
           this.messageService.setErrorMessage('Не удалось удалить фильм: ' + r.error.errorMessage);
         }
       );
+  }
+
+  active(filter: string) {
+    return filter === this.filter ? 'active' : '';
   }
 }

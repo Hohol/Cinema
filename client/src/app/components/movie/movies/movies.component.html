@@ -1,3 +1,21 @@
+<nav class="navbar navbar-expand-md nav nav-tabs">
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" [ngClass]="active('ongoing')">
+        <a class="nav-link" routerLink="/movies" [queryParams]="{ filter: 'ongoing' }">Идущие в показе</a>
+      </li>
+      <li class="nav-item" [ngClass]="active('comingSoon')">
+        <a class="nav-link" routerLink="/movies" [queryParams]="{ filter: 'comingSoon'}">Предстоящие</a>
+      </li>
+      <ng-container *ngIf=" currentUser | isAdmin">
+        <li class="nav-item" [ngClass]="active('all')">
+          <a class="nav-link" routerLink="/movies" [queryParams]="{ filter: 'all'}">Все фильмы</a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</nav>
+
 <div *ngIf="currentUser | isAdmin">
   <a routerLink="/movies/create">Добавить новый фильм</a>
 </div>
