@@ -26,6 +26,7 @@ import {CreateSeanceComponent} from './components/seance/create-seance/create-se
 import {OwlDateTimeModule} from 'ng-pick-datetime';
 import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
 import {EditSeanceComponent} from './components/seance/create-seance/edit-seance.component';
+import { DiscountComponent } from './components/discount/discount.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {EditSeanceComponent} from './components/seance/create-seance/edit-seance
     CreateHallComponent,
     EditHallComponent,
     CreateSeanceComponent,
-    EditSeanceComponent
+    EditSeanceComponent,
+    DiscountComponent
   ],
   imports: [
     BrowserModule,

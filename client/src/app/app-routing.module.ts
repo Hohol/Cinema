@@ -15,6 +15,7 @@ import {CreateHallComponent} from './components/hall/create-hall/create-hall.com
 import {EditHallComponent} from './components/hall/create-hall/edit-hall.component';
 import {CreateSeanceComponent} from './components/seance/create-seance/create-seance.component';
 import {EditSeanceComponent} from './components/seance/create-seance/edit-seance.component';
+import {DiscountComponent} from './components/discount/discount.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/movies', pathMatch: 'full'},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'seances/edit/:id', component: EditSeanceComponent},
   {path: 'seances/buy/:id', component: BuyTicketsComponent},
   {path: 'seances/:id', component: SeanceStatsComponent},
+  {path: 'discounts', component: DiscountComponent},
   {path: 'halls', component: HallsComponent},
   {path: 'halls/create', component: CreateHallComponent},
   {path: 'halls/edit/:id', component: EditHallComponent},
