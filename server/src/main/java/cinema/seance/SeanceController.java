@@ -36,14 +36,24 @@ class SeanceController {
             Principal principal,
             @RequestParam(value = "movieId", required = false) Long movieId
     ) {
+        User user = getUser(principal);
+        boolean isAdmin = user != null && user.isAdmin();
         Collection<Seance> seances;
         if (movieId != null) {
-            seances = seanceRepository.findAllByMovieId(movieId);
+            if (isAdmin) {
+                seances = seanceRepository.findAllByMovieId(movieId);
+            } else {
+                seances = seanceRepository.findAllByMovieIdAndStartTimeGreaterThan(movieId, Instant.now());
+            }
         } else {
-            seances = seanceRepository.findAll();
+            if (isAdmin) {
+                seances = seanceRepository.findAll();
+            } else {
+                seances = seanceRepository.findAllByStartTimeGreaterThan(Instant.now());
+            }
         }
         return seances.stream()
-                .map(s -> seanceForApi(s, getUser(principal)))
+                .map(s -> seanceForApi(s, user))
                 .collect(Collectors.toList());
     }
 

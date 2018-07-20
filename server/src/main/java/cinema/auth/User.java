@@ -109,4 +109,9 @@ public class User implements UserDetails {
     public LocalDate getBirthday() {
         return birthday;
     }
+
+    @JsonIgnore
+    public boolean isAdmin() {
+        return Role.valueOf(role) == Role.ADMIN;
+    }
 }
