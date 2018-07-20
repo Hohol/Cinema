@@ -42,7 +42,7 @@ export class EditSeanceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.movieService.getMovies()
+    this.movieService.getMovies('all')
       .subscribe(movies => this.movies = movies);
     this.hallService.getHalls()
       .subscribe(halls => this.halls = halls);
