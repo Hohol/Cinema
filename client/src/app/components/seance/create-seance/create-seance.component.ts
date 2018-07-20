@@ -1,15 +1,18 @@
-import {ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MessageService} from '../../../services/message.service';
 import {Router} from '@angular/router';
 import {SeanceService} from '../../../services/seance.service';
 import {Moment} from 'moment';
+import {Movie} from '../../../model/model.movie';
+import {Hall} from '../../../model/model.hall';
+import {HallService} from '../../../services/hall.service';
+import {MovieService} from '../../../services/movie.service';
 
 @Component({
   selector: 'app-create-seance',
   templateUrl: './create-seance.component.html',
   styleUrls: ['./create-seance.component.css'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None, // some magic required for dateTimePicker...
 })
 export class CreateSeanceComponent implements OnInit {
 
@@ -21,14 +24,23 @@ export class CreateSeanceComponent implements OnInit {
   movieId: number;
   hallId: number;
 
+  movies: Movie[];
+  halls: Hall[];
+
   constructor(
     private seanceService: SeanceService,
+    private hallService: HallService,
+    private movieService: MovieService,
     private messageService: MessageService,
     private router: Router,
   ) {
   }
 
   ngOnInit() {
+    this.movieService.getMovies()
+      .subscribe(movies => this.movies = movies);
+    this.hallService.getHalls()
+      .subscribe(halls => this.halls = halls);
   }
 
   cancel() {

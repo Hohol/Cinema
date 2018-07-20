@@ -3,11 +3,12 @@
   <div class="row">
 
     <div class="col-md-4 mb-3">
-      <label for="movieId">id фильма</label>
-      <input type="number" class="form-control" id="movieId" name="movieId" [(ngModel)]="movieId" #mId="ngModel"
-             required>
-      <div *ngIf="f.submitted && !mId.valid" class="help-block">
-        Введите id фильма
+      <label for="movie">Фильм</label>
+      <select [(ngModel)]="movieId" class="form-control" id="movie" name="movieId" #mov="ngModel" required>
+        <option *ngFor="let movie of movies" [ngValue]="movie.id">{{movie.title}}</option>
+      </select>
+      <div *ngIf="f.submitted && !mov.valid" class="help-block">
+        Выберите фильм
       </div>
     </div>
 
@@ -23,11 +24,12 @@
     </div>
 
     <div class="col-md-4 mb-3">
-      <label for="hallId">id зала</label>
-      <input type="number" class="form-control" id="hallId" name="hallId" [(ngModel)]="hallId" #hId="ngModel"
-             required>
-      <div *ngIf="f.submitted && !hId.valid" class="help-block">
-        Введите id зала
+      <label for="hall">Зал</label>
+      <select [(ngModel)]="hallId" class="form-control" id="hall" name="hall" #h="ngModel" required>
+        <option *ngFor="let hall of halls" [ngValue]="hall.id">{{hall.name}}</option>
+      </select>
+      <div *ngIf="f.submitted && !h.valid" class="help-block">
+        Выберите зал
       </div>
     </div>
 
