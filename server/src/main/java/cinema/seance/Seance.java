@@ -56,4 +56,16 @@ public class Seance {
     public long getId() {
         return id;
     }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public void setHall(Hall hall) {
+        this.hall = hall;
+    }
+
+    public void setStartTime(Instant startTime) {
+        this.startTime = startTime;
+    }
 }

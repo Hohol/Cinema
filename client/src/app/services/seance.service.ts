@@ -50,4 +50,8 @@ export class SeanceService extends BaseApiService {
   createSeance(seance) {
     return this.post('/seances/create', seance);
   }
+
+  editSeance(seance) {
+    return this.post('/seances/edit', seance);
+  }
 }

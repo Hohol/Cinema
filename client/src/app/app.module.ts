@@ -25,6 +25,7 @@ import {EditHallComponent} from './components/hall/create-hall/edit-hall.compone
 import {CreateSeanceComponent} from './components/seance/create-seance/create-seance.component';
 import {OwlDateTimeModule} from 'ng-pick-datetime';
 import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
+import {EditSeanceComponent} from './components/seance/create-seance/edit-seance.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
     CreateHallComponent,
     EditHallComponent,
     CreateSeanceComponent,
+    EditSeanceComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,7 @@ import {OwlMomentDateTimeModule} from 'ng-pick-datetime-moment';
     MatMomentDateModule,
     BrowserAnimationsModule,
     OwlDateTimeModule,
-    OwlMomentDateTimeModule ,
+    OwlMomentDateTimeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

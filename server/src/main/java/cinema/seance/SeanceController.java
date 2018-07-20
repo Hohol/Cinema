@@ -54,6 +54,7 @@ class SeanceController {
     }
 
     private static class NewSeance {
+        public Long id;
         public long movieId;
         public String startTime;
         public long hallId;
@@ -61,7 +62,8 @@ class SeanceController {
         @Override
         public String toString() {
             return "NewSeance{" +
-                    "movieId=" + movieId +
+                    "id=" + id +
+                    ", movieId=" + movieId +
                     ", startTime='" + startTime + '\'' +
                     ", hallId=" + hallId +
                     '}';
@@ -70,11 +72,26 @@ class SeanceController {
 
     @PostMapping("/seances/create")
     @Transactional
-    public void seance(@RequestBody NewSeance newSeance) {
+    public void create(@RequestBody NewSeance newSeance) {
         Movie movie = movieRepository.getOne(newSeance.movieId);
         Hall hall = hallRepository.getOne(newSeance.hallId);
         Instant startTime = Instant.parse(newSeance.startTime);
         Seance seance = new Seance(movie, hall, startTime);
+        seanceRepository.save(seance);
+    }
+
+    @PostMapping("/seances/edit")
+    @Transactional
+    public void edit(@RequestBody NewSeance newSeance) {
+        Movie movie = movieRepository.getOne(newSeance.movieId);
+        Hall hall = hallRepository.getOne(newSeance.hallId);
+        Instant startTime = Instant.parse(newSeance.startTime);
+
+        Seance seance = seanceRepository.getOne(newSeance.id);
+        seance.setMovie(movie);
+        seance.setHall(hall);
+        seance.setStartTime(startTime);
+
         seanceRepository.save(seance);
     }
 

@@ -1,7 +1,6 @@
 package cinema.hall;
 
 import cinema.auth.CustomErrorType;
-import cinema.movie.Movie;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

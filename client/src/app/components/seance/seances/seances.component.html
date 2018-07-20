@@ -9,12 +9,17 @@
     <td>{{seance.formattedStartTime()}}</td>
     <td>{{seance.price}} руб.</td>
     <td><a routerLink="/seances/buy/{{seance.id}}">Купить билеты</a></td>
-    <td *ngIf="currentUser | isAdmin">
-      <a routerLink="/seances/{{seance.id}}">Статистика сеанса</a>
-    </td>
-    <td *ngIf="currentUser | isAdmin">
-      <button (click)="delete(seance.id)">Удалить</button>
-    </td>
+    <ng-container *ngIf="currentUser | isAdmin">
+      <td>
+        <a routerLink="/seances/{{seance.id}}">Статистика сеанса</a>
+      </td>
+      <td>
+        <button (click)="delete(seance.id)">Удалить</button>
+      </td>
+      <td>
+        <a routerLink="/seances/edit/{{seance.id}}">Редактировать</a>
+      </td>
+    </ng-container>
   </tr>
   </tbody>
 </table>
