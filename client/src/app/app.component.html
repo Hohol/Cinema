@@ -32,10 +32,10 @@
 
     <ul *ngIf="currentUser" class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link">{{currentUser.username}}</a>
+        <a class="nav-link" href="#" onclick="return false;">{{currentUser.username}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="logOut()">Выход</a>
+        <a class="nav-link" href="#" (click)="logOut()">Выход</a>
       </li>
     </ul>
   </div>
